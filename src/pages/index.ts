@@ -4,5 +4,6 @@ import Artist from "./Artist";
 import Artists from "./Artists";
 import Home from "./Home";
 import NotFound from "./NotFound";
+import Songs from "./Songs";
 
-export { Album, Albums, Artist, Artists, Home, NotFound };
+export { Album, Albums, Artist, Artists, Home, NotFound, Songs };
