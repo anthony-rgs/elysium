@@ -1,4 +1,4 @@
-import IconContainer from "../IconContainer";
+import { IconContainer } from "@/components";
 
 type Props = {
   icon?: React.ReactElement;
@@ -7,7 +7,7 @@ type Props = {
   size: "medium" | "large";
 };
 
-export default function ButtonSecondary({ icon, label, link, size }: Props) {
+export default function SecondaryButton({ icon, label, link, size }: Props) {
   const baseStyles =
     "text-grey font-circular-bold cursor-pointer transition-transform transform-gpu duration-200 antialiased group-hover:text-white group-active:text-grey";
 

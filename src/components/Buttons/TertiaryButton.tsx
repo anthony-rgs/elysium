@@ -1,4 +1,4 @@
-import IconContainer from "../IconContainer";
+import { IconContainer } from "@/components";
 
 type Props = {
   icon?: React.ReactElement;
@@ -6,13 +6,15 @@ type Props = {
   onClick?: () => void;
 };
 
-export default function ButtonTertiary({ icon, label, onClick }: Props) {
+export default function TertiaryButton({ icon, label, onClick }: Props) {
+  const paddingClassName = icon ? "py-1 pr-4" : "py-4";
+
   return (
     <button
       className={`
         group 
         flex items-center justify-center gap-2 
-        w-fit h-8 px-3 py-1 pr-4 
+        w-fit h-8 px-3 ${paddingClassName}
         rounded-full border border-grey 
         text-white text-[0.813rem] sm:text-sm 
         tracking-[-0.0053em] sm:tracking-[-0.005em] 
