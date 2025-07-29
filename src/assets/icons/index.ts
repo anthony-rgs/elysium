@@ -1,6 +1,7 @@
 import BrowseIcon from "./BrowseIcon";
 import CrossIcon from "./CrossIcon";
 import DownloadIcon from "./DownloadIcon";
+import QuestionMarkIcon from "./QuestionMarkIcon";
 import FacebookIcon from "./FacebookIcon";
 import InstagramIcon from "./InstagramIcon";
 import SearchIcon from "./SearchIcon";
@@ -12,6 +13,7 @@ export {
   BrowseIcon,
   CrossIcon,
   DownloadIcon,
+  QuestionMarkIcon,
   FacebookIcon,
   HomeIcon,
   InstagramIcon,
