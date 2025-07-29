@@ -4,6 +4,7 @@ type Props = {
   icon: React.ReactElement;
   size: "small" | "medium" | "large";
   tooltipText?: string;
+  tooltipPosition: "top" | "bottom";
   variant?: "circle-light" | "circle-dark";
 };
 
@@ -13,6 +14,7 @@ export default function IconContainer({
   icon,
   size,
   tooltipText,
+  tooltipPosition,
   variant,
 }: Props) {
   const baseTransition = "transition-colors duration-200 ease-in-out";
@@ -40,6 +42,9 @@ export default function IconContainer({
     ? "hover:scale-[1.04] active:scale-[1] group-hover:scale-[1.04] group-active:scale-[1]"
     : "";
 
+  const tooltipPositionClassName =
+    tooltipPosition === "top" ? "bottom-[40px]" : "top-[40px]";
+
   return (
     <div className="relative w-fit group">
       <div
@@ -54,15 +59,16 @@ export default function IconContainer({
 
       {tooltipText && (
         <span
-          className="
-            absolute bottom-[-40px] left-1/2 -translate-x-1/2 z-2
+          className={`
+            absolute left-1/2 -translate-x-1/2
+            ${tooltipPositionClassName}
             opacity-0 invisible group-hover:opacity-100 group-hover:visible
             delay-0 group-hover:delay-200 transition duration-200
             pointer-events-none
             bg-elevated-highlight shadow-elevated
-            text-sm tracking-[-0.01em] font-circular-book
+            text-sm  font-circular-light
             py-1 px-2 rounded-sm
-          "
+          `}
         >
           {tooltipText}
         </span>
