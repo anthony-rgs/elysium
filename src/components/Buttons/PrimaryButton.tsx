@@ -6,7 +6,7 @@ type Props = {
 
 export default function PrimaryButton({ label, link, size }: Props) {
   const baseStyles =
-    "bg-white text-black font-circular-bold rounded-full cursor-pointer transition-transform transform-gpu duration-[90ms] antialiased hover:scale-[1.04] hover:bg-white-hover active:scale-[1] active:bg-white-active";
+    "bg-white text-black font-circular-bold rounded-full cursor-pointer transition-transform transform-gpu duration-[90ms] antialiased whitespace-nowrap hover:scale-[1.04] hover:bg-white-hover active:scale-[1] active:bg-white-active";
 
   const sizeStyles =
     size === "large"

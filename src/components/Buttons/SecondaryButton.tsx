@@ -9,7 +9,7 @@ type Props = {
 
 export default function SecondaryButton({ icon, label, link, size }: Props) {
   const baseStyles =
-    "text-grey font-circular-bold cursor-pointer transition-transform transform-gpu duration-200 antialiased group-hover:text-white group-active:text-grey";
+    "text-grey font-circular-bold cursor-pointer transition-transform transform-gpu duration-200 antialiased whitespace-nowrap group-hover:text-white group-active:text-grey";
 
   const sizeStyles =
     size === "large"
