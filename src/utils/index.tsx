@@ -1,6 +1,23 @@
-import { informationsFooterData } from "./informationsFooterData";
-import { pagesFooterData } from "./pagesFooterData";
-import { routes } from "./routes";
-import { tabsData } from "./tabsData";
+// Constants
+import { informationsFooter } from "./constants/informationsFooter.constants";
+import {
+  pagesFooterColumns,
+  pagesFooterSocialMedia,
+} from "./constants/pagesFooter.constants";
+import { routes } from "./constants/routes.constants";
+import { tabs } from "./constants/tabs.constants";
 
-export { informationsFooterData, pagesFooterData, routes, tabsData };
+// Helpers
+import { formatDuration } from "./helpers/formatDuration.helpers";
+
+export {
+  // Constants
+  informationsFooter,
+  pagesFooterColumns,
+  pagesFooterSocialMedia,
+  routes,
+  tabs,
+
+  // Helpers
+  formatDuration,
+};

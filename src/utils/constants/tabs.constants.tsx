@@ -3,7 +3,7 @@ type Props = {
   link: string;
 };
 
-export const tabsData: Props[] = [
+export const tabs: Props[] = [
   {
     label: "All",
     link: "/",

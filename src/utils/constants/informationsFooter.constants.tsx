@@ -3,7 +3,7 @@ type Props = {
   link: string;
 };
 
-export const informationsFooterData: Props[] = [
+export const informationsFooter: Props[] = [
   {
     label: "Legal",
     link: "https://www.spotify.com/fr/legal/end-user-agreement/",
