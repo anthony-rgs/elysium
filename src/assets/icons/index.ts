@@ -1,23 +1,29 @@
 import BrowseIcon from "./BrowseIcon";
 import CrossIcon from "./CrossIcon";
 import DownloadIcon from "./DownloadIcon";
-import QuestionMarkIcon from "./QuestionMarkIcon";
 import FacebookIcon from "./FacebookIcon";
-import InstagramIcon from "./InstagramIcon";
-import SearchIcon from "./SearchIcon";
-import TwitterIcon from "./TwitterIcon";
 import HomeIcon from "./HomeIcon";
+import InstagramIcon from "./InstagramIcon";
+import PlayIcon from "./PlayIcon";
+import QuestionMarkIcon from "./QuestionMarkIcon";
+import SearchIcon from "./SearchIcon";
+import SpotifyIcon from "./SpotifyIcon";
+import TwitterIcon from "./TwitterIcon";
+import VerifiedIcon from "./VerifiedIcon";
 import WorldIcon from "./WorldIcon";
 
 export {
   BrowseIcon,
   CrossIcon,
   DownloadIcon,
-  QuestionMarkIcon,
   FacebookIcon,
   HomeIcon,
   InstagramIcon,
+  PlayIcon,
+  QuestionMarkIcon,
   SearchIcon,
+  SpotifyIcon,
   TwitterIcon,
+  VerifiedIcon,
   WorldIcon,
 };
