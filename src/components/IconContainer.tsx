@@ -1,10 +1,10 @@
 type Props = {
-  color: "grey" | "white";
+  color: "grey" | "white" | "blue";
   effect?: "scale";
   icon: React.ReactElement;
   size: "small" | "medium" | "large";
   tooltipText?: string;
-  tooltipPosition: "top" | "bottom";
+  tooltipPosition?: "top" | "bottom";
   variant?: "circle-light" | "circle-dark";
 };
 
@@ -43,7 +43,9 @@ export default function IconContainer({
     : "";
 
   const tooltipPositionClassName =
-    tooltipPosition === "top" ? "bottom-[40px]" : "top-[40px]";
+    tooltipPosition === "top"
+      ? "-translate-y-[calc(50%+42px)]"
+      : "-translate-y-[calc(50%-42px)]";
 
   return (
     <div className="relative w-fit group">
@@ -60,15 +62,14 @@ export default function IconContainer({
       {tooltipText && (
         <span
           className={`
-            absolute left-1/2 -translate-x-1/2
-            ${tooltipPositionClassName}
+            absolute left-1/2 -translate-x-1/2 top-1/2 ${tooltipPositionClassName}
+             delay-0 group-hover:delay-200 transition duration-200
             opacity-0 invisible group-hover:opacity-100 group-hover:visible
-            delay-0 group-hover:delay-200 transition duration-200
-            pointer-events-none
+            whitespace-nowrap pointer-events-none
             bg-elevated-highlight shadow-elevated
             text-sm  font-circular-light
-            py-1 px-2 rounded-sm
-          `}
+            py-1 px-2 rounded-sm z-3
+            `}
         >
           {tooltipText}
         </span>
