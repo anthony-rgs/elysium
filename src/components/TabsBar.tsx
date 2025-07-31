@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { tabsData } from "@/utils";
+import { tabs } from "@/utils";
 import { TabButton } from "@/components";
 
 export default function TabsBar() {
@@ -7,12 +7,13 @@ export default function TabsBar() {
   const currentPage = location.pathname;
 
   return (
-    <div className="flex gap-2 w-full bg-container px-[18px] py-3 top-0 rounded-t-sm">
-      {tabsData.map((tabData) => (
+    <div className="sticky top-0 flex gap-2 rounded-t-lg bg-container px-5 py-3 z-2">
+      {tabs.map((tab) => (
         <TabButton
-          label={tabData.label}
-          link={tabData.link}
-          selected={tabData.link === currentPage}
+          key={tab.label}
+          label={tab.label}
+          link={tab.link}
+          selected={tab.link === currentPage}
         />
       ))}
     </div>
