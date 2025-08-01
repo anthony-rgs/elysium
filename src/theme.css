@@ -1,4 +1,14 @@
+html,
+body {
+  overscroll-behavior: none;
+}
+
 @import "tailwindcss";
+
+@font-face {
+  font-family: "CircularStd-Light";
+  src: url("/src/assets/fonts/CircularStd-Light.ttf") format("truetype");
+}
 
 @font-face {
   font-family: "CircularStd-Book";
@@ -21,56 +31,37 @@
 }
 
 @theme {
+  --font-circular-light: "CircularStd-Light", sans-serif;
   --font-circular-book: "CircularStd-Book", sans-serif;
-  --font-circular-black: "CircularStd-Medium", sans-serif;
+  --font-circular-medium: "CircularStd-Medium", sans-serif;
   --font-circular-black: "CircularStd-Black", sans-serif;
   --font-circular-bold: "CircularStd-Bold", sans-serif;
 
   --breakpoint-sm: 800px;
+  --breakpoint-lg: 1025px;
 
   --color-black: #000;
+  --color-blue: #4bb3ff;
+
+  --color-white: #fff;
+  --color-white-hover: #f0f0f0;
+  --color-white-active: #c7c7c7;
+
+  --color-grey: #b3b3b3;
+  --color-grey-light: #cdcdcd;
+  --color-grey-dark: #727272;
+
+  --color-container: #121212;
+
   --color-elevated-base: #1f1f1f;
   --color-elevated-highlight: #2a2a2a;
   --color-elevated-press: #191919;
 
-  --color-white: #fff;
-  --color-grey: #b3b3b3;
-  --color-grey-dark: #727272;
+  --color-page-base: #353535ff;
 
-  --radius-max: 9999px;
-
-  --color-white-hover: #f0f0f0;
-  --color-white-active: #c7c7c7;
+  --color-divider: #292929;
+  --color-divider-light: #7c7c7c;
 
   --shadow-elevated: 0 16px 24px rgba(0, 0, 0, 0.3),
     0 6px 8px rgba(0, 0, 0, 0.2);
-
-  /*  */
-
-  --color-background-default: #000;
-
-  --color-background-base: #121212;
-  --color-background-highlight: #1f1f1f;
-  --color-background-press: #000;
-
-  --color-background-elevated-base: #1f1f1f;
-  --color-background-elevated-highlight: #2a2a2a;
-  --color-background-elevated-press: #191919;
-
-  --color-background-tinted-base: #ffffff1a;
-  --color-background-tinted-highlight: #ffffff24;
-  --color-background-tinted-press: #ffffff36;
-
-  --color-text-base: #fff;
-  --color-text-subdued: #b3b3b3;
-  --color-text-bright-accent: #1ed760;
-  --color-text-negative: #f3727f;
-  --color-text-warning: #ffa42b;
-  --color-text-positive: #1ed760;
-  --color-text-announcement: #4cb3ff;
-
-  --color-essential-base: #fff;
-  --color-essential-subdued: #7c7c7c;
-  --color-essential-bright-accent: #1ed760;
-  --color-essential-negative: #ed2c3f;
 }
