@@ -18,6 +18,7 @@ import SearchBarNav from "./SearchBars/SearchBarNav";
 // Other
 import Divider from "./Divider";
 import DynamicTitle from "./DynamicTitle";
+import EqualizerAnimation from "./EqualizerAnimation";
 import IconContainer from "./IconContainer";
 import InformationsContainer from "./InformationsContainer";
 import Layout from "./Layout";
@@ -27,6 +28,7 @@ import SpotifyPlayerContainer from "./SpotifyPlayerContainer";
 import NavBar from "./NavBar";
 import TabsBar from "./TabsBar";
 import TrackRow from "./TrackRow";
+import TracksContainerHeader from "./TracksContainerHeader";
 
 export {
   // Buttons
@@ -49,6 +51,7 @@ export {
   // Other
   Divider,
   DynamicTitle,
+  EqualizerAnimation,
   IconContainer,
   InformationsContainer,
   Layout,
@@ -58,4 +61,5 @@ export {
   NavBar,
   TabsBar,
   TrackRow,
+  TracksContainerHeader,
 };
