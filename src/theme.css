@@ -30,6 +30,16 @@ body {
   src: url("/src/assets/fonts/CircularStd-Black.ttf") format("truetype");
 }
 
+@keyframes equalizer {
+  0%,
+  100% {
+    height: 2px;
+  }
+  50% {
+    height: 16px;
+  }
+}
+
 @theme {
   --font-circular-light: "CircularStd-Light", sans-serif;
   --font-circular-book: "CircularStd-Book", sans-serif;
@@ -42,6 +52,7 @@ body {
 
   --color-black: #000;
   --color-blue: #4bb3ff;
+  --color-green: #1cb955;
 
   --color-white: #fff;
   --color-white-hover: #f0f0f0;
