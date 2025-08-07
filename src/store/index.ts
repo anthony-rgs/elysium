@@ -1,13 +1,39 @@
-import { configureStore } from "@reduxjs/toolkit";
-import spotifyPlayerReducer from "./spotifyPlayerSlice";
-import columnsReducer from "./columnsSlice";
+export * from "./store";
 
-export const store = configureStore({
-  reducer: {
-    spotifyPlayer: spotifyPlayerReducer,
-    columns: columnsReducer,
-  },
-});
+// Slices
+import {
+  showIframeContainer,
+  hideIframeContainer,
+} from "./spotifyPlayer.slice";
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+import { setColumnWidth } from "./columns.slice";
+import { setSortTracks } from "./tracks/sortTracks.slice";
+
+import { setTracks, setCurrentPage } from "./tracks/tracks.slice";
+
+import { setPageTitle } from "./pageTitle.slice";
+
+// Selectors
+import {
+  selectSortedPaginatedTracks,
+  selectTotalPages,
+  selectCurrentPage,
+  selectTotalTracks,
+} from "./tracks/tracks.selector";
+
+export {
+  // Slices
+  hideIframeContainer,
+  setColumnWidth,
+  setCurrentPage,
+  setPageTitle,
+  setSortTracks,
+  setTracks,
+  showIframeContainer,
+
+  // Selectors
+  selectSortedPaginatedTracks,
+  selectTotalPages,
+  selectCurrentPage,
+  selectTotalTracks,
+};

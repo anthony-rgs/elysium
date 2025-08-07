@@ -15,12 +15,10 @@ const spotifyPlayerSlice = createSlice({
   name: "spotifyPlayer",
   initialState,
   reducers: {
-    // open spotify iframe container
     showIframeContainer: (state, action: PayloadAction<string>) => {
       state.isVisible = true;
       state.iframe = action.payload;
     },
-    // close spotify iframe container
     hideIframeContainer: (state) => {
       state.isVisible = false;
       state.iframe = "";
