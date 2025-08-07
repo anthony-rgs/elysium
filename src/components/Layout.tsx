@@ -5,10 +5,14 @@ import {
   SpotifyPlayerContainer,
   TabsBar,
 } from "@/components";
-import { hideIframeContainer } from "@/store/spotifyPlayerSlice";
+
+import { setTracks } from "@/store";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { hideIframeContainer } from "@/store";
+
+import fakeData from "@/data/fake_data.json";
 
 type Props = {
   children: React.ReactNode;
@@ -17,6 +21,10 @@ type Props = {
 export default function Layout({ children }: Props) {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setTracks(fakeData.tracks)); // Init data
+  }, []);
 
   // Hide the iframe container each time the page changes
   useEffect(() => {
@@ -30,7 +38,7 @@ export default function Layout({ children }: Props) {
       <div className="flex flex-1 h-full pt-16 p-2">
         <InformationsContainer />
 
-        <section className="rounded-lg flex-1 overflow-auto bg-container ">
+        <section className="rounded-lg flex-1 overflow-auto bg-container">
           <div className="relative">
             <TabsBar />
 
