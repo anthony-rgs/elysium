@@ -10,7 +10,7 @@ export default function SpotifyPlayerContainer() {
 
   return (
     <div
-      className="sticky bottom-[-30px] w-full bg-elevated-base"
+      className="sticky h-20 overflow-hidden bottom-0 w-full bg-elevated-base z-4"
       dangerouslySetInnerHTML={{ __html: iframe }}
     />
   );
