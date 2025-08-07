@@ -1,13 +1,15 @@
 import { PlayIcon } from "@/assets/icons";
-import { IconContainer } from "@/components";
-import { showIframeContainer } from "@/store/spotifyPlayerSlice";
+import { IconContainer, Tooltip } from "@/components";
+import { showIframeContainer } from "@/store";
 import { useDispatch } from "react-redux";
 
 type Props = {
+  artists: string[];
   iframe: string;
+  track: string;
 };
 
-export default function PlayButton({ iframe }: Props) {
+export default function PlayButton({ artists, iframe, track }: Props) {
   const dispatch = useDispatch();
 
   const handleShowContainer = () => {
@@ -15,12 +17,14 @@ export default function PlayButton({ iframe }: Props) {
   };
 
   return (
-    <div onClick={handleShowContainer}>
-      <IconContainer
-        color="white"
-        icon={<PlayIcon />}
-        size="small"
-      />
-    </div>
+    <Tooltip text={`Play ${track} by ${artists.join(", ")}`}>
+      <div onClick={handleShowContainer}>
+        <IconContainer
+          color="white"
+          icon={<PlayIcon />}
+          size="small"
+        />
+      </div>
+    </Tooltip>
   );
 }
