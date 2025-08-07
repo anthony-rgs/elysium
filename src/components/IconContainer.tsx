@@ -1,5 +1,8 @@
+import { Tooltip } from "@/components";
+
 type Props = {
-  color: "grey" | "white" | "blue";
+  color: "grey" | "white" | "blue" | "green";
+  disable?: boolean;
   effect?: "scale";
   icon: React.ReactElement;
   size: "small" | "medium" | "large";
@@ -10,17 +13,16 @@ type Props = {
 
 export default function IconContainer({
   color,
+  disable = false,
   effect,
   icon,
   size,
   tooltipText,
-  tooltipPosition,
+  tooltipPosition = "top",
   variant,
 }: Props) {
   const baseTransition = "transition-colors duration-200 ease-in-out";
-
   const svgColor = `text-${color}`;
-
   const svgSize = {
     large: "h-8 w-8",
     medium: "h-6 w-6",
@@ -38,42 +40,37 @@ export default function IconContainer({
     }
   })();
 
-  const effectClassNames = effect
-    ? "hover:scale-[1.04] active:scale-[1] group-hover:scale-[1.04] group-active:scale-[1]"
-    : "";
+  const effectClassNames =
+    effect && !disable
+      ? "hover:scale-[1.04] active:scale-[1] group-hover:scale-[1.04] group-active:scale-[1]"
+      : "";
 
-  const tooltipPositionClassName =
-    tooltipPosition === "top"
-      ? "-translate-y-[calc(50%+42px)]"
-      : "-translate-y-[calc(50%-42px)]";
-
-  return (
+  const iconElement = (
     <div className="relative w-fit group">
       <div
-        className={`cursor-pointer ${variantClassNames} ${baseTransition} ${effectClassNames}`}
+        className={`${
+          disable ? "cursor-not-allowed" : "cursor-pointer"
+        } ${variantClassNames} ${baseTransition} ${effectClassNames}`}
       >
         <div
-          className={`flex items-center gap-2 ${svgSize} ${svgColor} ${baseTransition} group-hover:text-white group-active:text-grey`}
+          className={`flex items-center gap-2 ${svgSize} ${svgColor} ${baseTransition} ${
+            !disable && "group-hover:text-white group-active:text-grey"
+          }`}
         >
           {icon}
         </div>
       </div>
-
-      {tooltipText && (
-        <span
-          className={`
-            absolute left-1/2 -translate-x-1/2 top-1/2 ${tooltipPositionClassName}
-             delay-0 group-hover:delay-200 transition duration-200
-            opacity-0 invisible group-hover:opacity-100 group-hover:visible
-            whitespace-nowrap pointer-events-none
-            bg-elevated-highlight shadow-elevated
-            text-sm  font-circular-light
-            py-1 px-2 rounded-sm z-3
-            `}
-        >
-          {tooltipText}
-        </span>
-      )}
     </div>
+  );
+
+  return tooltipText ? (
+    <Tooltip
+      text={tooltipText}
+      position={tooltipPosition}
+    >
+      {iconElement}
+    </Tooltip>
+  ) : (
+    iconElement
   );
 }
