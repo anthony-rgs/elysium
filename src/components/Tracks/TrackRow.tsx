@@ -12,8 +12,8 @@ type Props = {
   musicLink: string;
   artistsNames: string[];
   artistsLinks: string;
-  albumName: string;
-  albumLink: string;
+  albumName?: string;
+  albumLink?: string;
   musicStreams: number;
 };
 
@@ -108,19 +108,21 @@ export default function TrackRow({
       </div>
 
       {/* Album column */}
-      <div
-        className="truncate ml-4 pr-3"
-        style={{ width: `${album}%` }}
-      >
-        <LinkButton
-          blank={false}
-          color="grey"
-          font="book"
-          label={albumName}
-          link={albumLink}
-          size={"small"}
-        />
-      </div>
+      {albumName && albumLink && (
+        <div
+          className="truncate ml-4 pr-3"
+          style={{ width: `${album}%` }}
+        >
+          <LinkButton
+            blank={false}
+            color="grey"
+            font="book"
+            label={albumName}
+            link={albumLink}
+            size={"small"}
+          />
+        </div>
+      )}
 
       {/* streams column */}
       <div
