@@ -79,7 +79,7 @@ export default function Songs() {
                 isSticky ? "bg-elevated-base z-4" : "bg-transparent z-1"
               }`}
             >
-              <TracksContainerHeader album={true} />
+              <TracksContainerHeader album />
             </div>
 
             <div className="mt-5 relative z-1">
@@ -101,7 +101,7 @@ export default function Songs() {
           </div>
 
           <div className="flex justify-center mb-5">
-            <TracksPagination scrollTop={true} />
+            <TracksPagination scrollTop />
           </div>
         </>
       )}

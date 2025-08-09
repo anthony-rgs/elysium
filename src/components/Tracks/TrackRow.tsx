@@ -73,14 +73,7 @@ export default function TrackRow({
         )}
 
         <div className="group-hover:text-white truncate">
-          <LinkButton
-            blank={false}
-            color="white"
-            font="book"
-            label={musicName}
-            link={musicLink}
-            size={"medium"}
-          />
+          <p className="font-circular-book tracking-[-0.012em]">{musicName}</p>
 
           {artistsNames && artistsLinks && (
             <div className="flex flex-row gap-1">
