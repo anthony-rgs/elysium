@@ -51,9 +51,7 @@ export default function TooltipLeave() {
             By continuing, you'll be taken to Spotify's official website
           </p>
 
-          <p className="font-circular-light text-sm">
-            Thanks for visiting my website !
-          </p>
+          <p className="font-circular-light text-sm">Thanks for visiting !</p>
 
           <div className="flex gap-4 justify-end mt-4">
             <SecondaryButton
