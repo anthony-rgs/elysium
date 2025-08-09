@@ -51,8 +51,10 @@ body {
   --breakpoint-lg: 1025px;
 
   --color-black: #000;
-  --color-blue: #4bb3ff;
   --color-green: #1cb955;
+
+  --color-blue: #4bb3ff;
+  --color-light-blue: #69bfff;
 
   --color-white: #fff;
   --color-white-hover: #f0f0f0;
