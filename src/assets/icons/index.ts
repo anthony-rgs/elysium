@@ -1,3 +1,8 @@
+// Home
+import HomeIcon from "./Home/HomeIcon";
+import HomeSelectedIcon from "./Home/HomeSelectedIcon";
+
+// Others
 import ArrowIcon from "./ArrowIcon";
 import BrowseIcon from "./BrowseIcon";
 import ChevronIcon from "./ChevronIcon";
@@ -5,7 +10,6 @@ import CrossIcon from "./CrossIcon";
 import DownloadIcon from "./DownloadIcon";
 import FacebookIcon from "./FacebookIcon";
 import FilterIcon from "./FilterIcon";
-import HomeIcon from "./HomeIcon";
 import InstagramIcon from "./InstagramIcon";
 import PlayIcon from "./PlayIcon";
 import QuestionMarkIcon from "./QuestionMarkIcon";
@@ -17,6 +21,11 @@ import VerifiedIcon from "./VerifiedIcon";
 import WorldIcon from "./WorldIcon";
 
 export {
+  // Home
+  HomeIcon,
+  HomeSelectedIcon,
+
+  // Others
   ArrowIcon,
   BrowseIcon,
   ChevronIcon,
@@ -24,7 +33,6 @@ export {
   DownloadIcon,
   FacebookIcon,
   FilterIcon,
-  HomeIcon,
   InstagramIcon,
   PlayIcon,
   QuestionMarkIcon,
