@@ -1,22 +1,27 @@
+import { setRedirectLink } from "@/store";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 type Props = {
-  blank: boolean;
+  blank?: boolean;
   color: "grey" | "white";
   font: "light" | "book" | "bold";
   label: string;
+  leaveSite?: boolean;
   link: string;
   size: "extra_small" | "small" | "medium" | "large" | "extra_large";
 };
 
 export default function LinkButton({
-  blank,
+  blank = false,
   color,
   font,
   label,
+  leaveSite = false,
   link,
   size,
 }: Props) {
+  const dispatch = useDispatch();
   const fontClassName = `font-circular-${font}`;
 
   const sizeClassNames = {
@@ -27,21 +32,29 @@ export default function LinkButton({
     extra_large: "text-2xl sm:text-[32px] tracking-[-0.02em]",
   }[size];
 
-  const baseClassNames = `${fontClassName} ${sizeClassNames} text-${color} w-fit hover:text-white hover:underline`;
+  const baseClassNames = `${fontClassName} ${sizeClassNames} text-${color} w-fit cursor-pointer hover:text-white hover:underline`;
 
-  const blankComponent = () => {
+  const handleLeaveSite = () => {
+    if (blank) {
+      window.open(link, "_blank");
+    } else {
+      dispatch(setRedirectLink(link));
+    }
+  };
+
+  const leaveComponent = () => {
     return (
-      <a
+      <button
         className={baseClassNames}
-        href={link}
-        target="_blank"
+        onClick={() => handleLeaveSite()}
+        type="button"
       >
         {label}
-      </a>
+      </button>
     );
   };
 
-  const linkComponnet = () => {
+  const linkComponent = () => {
     return (
       <Link
         className={baseClassNames}
@@ -52,9 +65,9 @@ export default function LinkButton({
     );
   };
 
-  if (blank) {
-    return blankComponent();
-  } else {
-    return linkComponnet();
+  if (leaveSite) {
+    return leaveComponent();
   }
+
+  return linkComponent();
 }
