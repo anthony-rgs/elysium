@@ -5,13 +5,11 @@ import {
   showIframeContainer,
   hideIframeContainer,
 } from "./spotifyPlayer.slice";
-
 import { setColumnWidth } from "./columns.slice";
 import { setSortTracks } from "./tracks/sortTracks.slice";
-
 import { setTracks, setCurrentPage } from "./tracks/tracks.slice";
-
 import { setPageTitle } from "./pageTitle.slice";
+import { setRedirectLink } from "./redirectLink.slice";
 
 // Selectors
 import {
@@ -27,6 +25,7 @@ export {
   setColumnWidth,
   setCurrentPage,
   setPageTitle,
+  setRedirectLink,
   setSortTracks,
   setTracks,
   showIframeContainer,

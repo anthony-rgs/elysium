@@ -16,6 +16,10 @@ import FooterPagesContainer from "./Footer/FooterPagesContainer";
 import SearchBarNav from "./SearchBars/SearchBarNav";
 import SearchBarTracks from "./SearchBars/SearchBarTracks";
 
+// Tooltips
+import Tooltip from "./Tooltips/Tooltip";
+import TooltipLeave from "./Tooltips/TooltipLeave";
+
 // Tracks
 import TrackRow from "./Tracks/TrackRow";
 import TracksContainerHeader from "./Tracks/TracksContainerHeader";
@@ -34,7 +38,6 @@ import PlayButton from "./PlayButton";
 import SpotifyPlayerContainer from "./SpotifyPlayerContainer";
 import NavBar from "./NavBar";
 import TabsBar from "./TabsBar";
-import Tooltip from "./Tooltip";
 import SortColumnIcon from "./SortColumnIcon";
 
 export {
@@ -56,6 +59,10 @@ export {
   SearchBarNav,
   SearchBarTracks,
 
+  // Tooltips
+  Tooltip,
+  TooltipLeave,
+
   // Tracks
   TrackRow,
   TracksContainerHeader,
@@ -74,6 +81,5 @@ export {
   SpotifyPlayerContainer,
   NavBar,
   TabsBar,
-  Tooltip,
   SortColumnIcon,
 };

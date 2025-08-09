@@ -4,6 +4,7 @@ import {
   NavBar,
   SpotifyPlayerContainer,
   TabsBar,
+  TooltipLeave,
 } from "@/components";
 
 import { setTracks } from "@/store";
@@ -50,6 +51,8 @@ export default function Layout({ children }: Props) {
           <SpotifyPlayerContainer />
         </section>
       </div>
+
+      <TooltipLeave />
     </div>
   );
 }
