@@ -14,6 +14,7 @@ type Props = {
 
 export default function ResizableHeader({ album }: Props) {
   const dispatch = useDispatch();
+  const [isHover, setIsHover] = useState(false);
   const { key, direction } = useSelector(
     (state: RootState) => state.sortTracks
   );
@@ -110,6 +111,8 @@ export default function ResizableHeader({ album }: Props) {
   const onMouseDown = (e: React.MouseEvent, type: "album" | "title") => {
     lastXRef.current = e.clientX;
     activeTypeRef.current = type;
+    document.body.style.cursor = "col-resize";
+    setIsHover(true);
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
@@ -227,6 +230,8 @@ export default function ResizableHeader({ album }: Props) {
   const onMouseUp = () => {
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("mouseup", onMouseUp);
+    document.body.style.cursor = "default";
+    setIsHover(false);
     activeTypeRef.current = null;
   };
 
@@ -240,7 +245,11 @@ export default function ResizableHeader({ album }: Props) {
       className="p-0.5 cursor-col-resize select-none"
       onMouseDown={onMouseDown}
     >
-      <hr className="w-[1px] h-4 mx-1 bg-grey-dark text-transparent opacity-0 group-hover:opacity-100" />
+      <hr
+        className={`w-[1px] h-4 mx-1 bg-grey-dark text-transparent opacity-0 group-hover:opacity-100 ${
+          isHover ? "opacity-100" : ""
+        }`}
+      />
     </div>
   );
 
