@@ -92,10 +92,10 @@ export default function MusicPageHeader({
                 />
 
                 <LinkButton
-                  blank={true}
                   color="white"
                   font="book"
                   label={additionalData.linkLabel}
+                  leaveSite
                   link={additionalData.linkURL}
                   size="small"
                 />

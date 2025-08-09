@@ -41,10 +41,11 @@ export default function FooterPagesContainer() {
         <p className="font-circular-light text-grey text-sm">© 2025 Made by </p>
 
         <LinkButton
-          blank={true}
-          color="grey"
+          blank
+          color="white"
           font="light"
           label="Anthony Ringressi"
+          leaveSite
           link="https://www.linkedin.com/in/anthony-ringressi/"
           size="small"
         />

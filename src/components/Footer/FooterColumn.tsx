@@ -17,10 +17,10 @@ export default function FooterColumn({ title, rows }: Props) {
       {rows.map((row, index) => (
         <React.Fragment key={`footer-row-${index}`}>
           <LinkButton
-            blank
             color="grey"
             font="light"
             label={row.label}
+            leaveSite
             link={row.link}
             size={"medium"}
           />

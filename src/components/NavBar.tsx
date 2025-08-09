@@ -4,9 +4,18 @@ import {
   SearchBarNav,
   SecondaryButton,
 } from "@/components";
-import { DownloadIcon, HomeIcon, SpotifyIcon } from "@/assets/icons";
+import {
+  DownloadIcon,
+  HomeIcon,
+  HomeSelectedIcon,
+  SpotifyIcon,
+} from "@/assets/icons";
+import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <div className="flex absolute w-full p-2 gap-3 justify-between">
       <div className="flex w-full">
@@ -19,15 +28,17 @@ export default function NavBar() {
         </div>
 
         <div className="flex gap-2 w-full">
-          <IconContainer
-            color="grey"
-            effect="scale"
-            icon={<HomeIcon />}
-            size="medium"
-            tooltipText="Home"
-            tooltipPosition="bottom"
-            variant="circle-light"
-          />
+          <Link to="/">
+            <IconContainer
+              color={isHomePage ? "white" : "grey"}
+              effect="scale"
+              icon={isHomePage ? <HomeSelectedIcon /> : <HomeIcon />}
+              size="medium"
+              tooltipText="Home"
+              tooltipPosition="bottom"
+              variant="circle-light"
+            />
+          </Link>
 
           <SearchBarNav />
         </div>
@@ -37,18 +48,21 @@ export default function NavBar() {
         <div className="flex gap-3 items-center">
           <SecondaryButton
             label="Premium"
+            leaveSite
             link="https://www.spotify.com/premium/"
             size="large"
           />
 
           <SecondaryButton
             label="Support"
+            leaveSite
             link="https://support.spotify.com"
             size="large"
           />
 
           <SecondaryButton
             label="Download"
+            leaveSite
             link="https://www.spotify.com/download/"
             size="large"
           />
@@ -60,18 +74,21 @@ export default function NavBar() {
           <SecondaryButton
             icon={<DownloadIcon />}
             label="Install App"
+            leaveSite
             link="https://open.spotify.com/download"
             size="large"
           />
 
           <SecondaryButton
             label="Sign up"
+            leaveSite
             link="https://www.spotify.com/signup"
             size="large"
           />
 
           <PrimaryButton
             label="Log in"
+            leaveSite
             link="https://accounts.spotify.com/"
             size="large"
           />

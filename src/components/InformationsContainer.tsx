@@ -122,10 +122,10 @@ export default function InformationsContainer() {
             {informationsFooter.map((information, index) => (
               <React.Fragment key={`link-${index}`}>
                 <LinkButton
-                  blank
                   color="grey"
                   font="light"
                   label={information.label}
+                  leaveSite
                   link={information.link}
                   size="extra_small"
                 />
