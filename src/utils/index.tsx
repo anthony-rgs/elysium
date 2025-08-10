@@ -12,6 +12,7 @@ import { filterTracksByQuery } from "./helpers/filterTracksByQuery.helpers";
 import { formatDuration } from "./helpers/formatDuration.helpers";
 import { formatTrackStreams } from "./helpers/formatTrackStreams.helpers";
 import { sortTracks } from "./helpers/sortTracks.helpers";
+import { totalTracksDuration } from "./helpers/totalTracksDuration.hepers";
 
 export {
   // Constants
@@ -26,4 +27,5 @@ export {
   formatDuration,
   formatTrackStreams,
   sortTracks,
+  totalTracksDuration,
 };
