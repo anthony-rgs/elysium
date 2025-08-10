@@ -10,17 +10,28 @@ import {
   selectTotalTracks,
   selectSortedPaginatedTracks,
   setPageTitle,
+  type RootState,
 } from "@/store";
 import { useDispatch } from "react-redux";
+import { totalTracksDuration } from "@/utils";
 
 export default function Songs() {
   const dispatch = useDispatch();
   const [isSticky, setIsSticky] = useState(false);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   const sortedPaginatedTracks = useSelector(selectSortedPaginatedTracks);
   const totalTracks = useSelector(selectTotalTracks);
+  const { cover_url, cover_artist } = useSelector(
+    (state: RootState) => state.playlitstCover
+  );
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+  // Set total tracks duraction
+  useEffect(() => {
+    setTotalDuration(totalTracksDuration(sortedPaginatedTracks));
+  }, [sortedPaginatedTracks]);
 
   useEffect(() => {
     // Update page title
@@ -50,17 +61,17 @@ export default function Songs() {
     <div className="relative">
       <MusicPageHeader
         pageType="billions-club"
-        imgURL="https://i.scdn.co/image/ab67706f000000028d5c76560a5e032b83050ef2"
+        imgURL={cover_url}
         surtitle="Public Playlist"
         title="BILLIONS CLUB"
-        subtitle="All the songs with more than 1 Billion streams on Spotify. Cover : Miley Cyrus"
+        subtitle={`All the songs with more than 1 Billion streams on Spotify. Cover : ${cover_artist}`}
         additionalData={{
           imgURL:
             "https://i.scdn.co/image/ab67757000003b8255c25988a6ac314394d3fbf5",
           linkLabel: "Spotify",
           linkURL: "https://open.spotify.com/user/spotify",
           songs: totalTracks,
-          time: 23232,
+          time: totalDuration,
         }}
         radius="rounded"
       />

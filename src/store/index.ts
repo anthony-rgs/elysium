@@ -10,6 +10,7 @@ import { setSortTracks } from "./tracks/sortTracks.slice";
 import { setTracks, setCurrentPage } from "./tracks/tracks.slice";
 import { setPageTitle } from "./pageTitle.slice";
 import { setRedirectLink } from "./redirectLink.slice";
+import { setPlaylistCover } from "./playlistCover.slice";
 
 // Selectors
 import {
@@ -25,6 +26,7 @@ export {
   setColumnWidth,
   setCurrentPage,
   setPageTitle,
+  setPlaylistCover,
   setRedirectLink,
   setSortTracks,
   setTracks,

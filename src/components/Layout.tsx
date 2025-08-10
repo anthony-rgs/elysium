@@ -7,7 +7,7 @@ import {
   TooltipLeave,
 } from "@/components";
 
-import { setTracks } from "@/store";
+import { setPlaylistCover, setTracks } from "@/store";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -25,6 +25,12 @@ export default function Layout({ children }: Props) {
 
   useEffect(() => {
     dispatch(setTracks(fakeData.tracks)); // Init data
+    dispatch(
+      setPlaylistCover({
+        cover_url: fakeData.cover_img,
+        cover_artist: fakeData.cover_artist,
+      })
+    );
   }, []);
 
   // Hide the iframe container each time the page changes

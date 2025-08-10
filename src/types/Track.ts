@@ -10,4 +10,5 @@ export type Track = {
   track_iframe: string;
   album_embed: string;
   album_iframe: string;
+  track_time: string;
 };

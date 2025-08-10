@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import columnsReducer from "./columns.slice";
 import filterTracksReducer from "./tracks/filterTracks.slice";
 import pageTitleReducer from "./pageTitle.slice";
+import playlistCoverReducer from "./playlistCover.slice";
 import spotifyPlayerReducer from "./spotifyPlayer.slice";
 import sortTracksReducer from "./tracks/sortTracks.slice";
 import tracksReducer from "./tracks/tracks.slice";
@@ -13,6 +14,7 @@ export const store = configureStore({
     columns: columnsReducer,
     filterTracks: filterTracksReducer,
     pageTitle: pageTitleReducer,
+    playlitstCover: playlistCoverReducer,
     redirectLink: redirectLinkReducer,
     spotifyPlayer: spotifyPlayerReducer,
     sortTracks: sortTracksReducer,
