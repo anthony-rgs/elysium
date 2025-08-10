@@ -26,6 +26,7 @@ export default function SearchBarNav() {
       <div className="flex gap-3 items-center">
         <IconContainer
           color={isHover ? "white" : "grey"}
+          disable
           icon={<SearchIcon />}
           size="medium"
           tooltipText="Search"
@@ -38,6 +39,7 @@ export default function SearchBarNav() {
       <div className="flex gap-3 items-center">
         <IconContainer
           color="grey"
+          disable
           icon={<CrossIcon />}
           size="medium"
           tooltipText="Clear search field"
@@ -48,6 +50,7 @@ export default function SearchBarNav() {
 
         <IconContainer
           color="grey"
+          disable
           icon={<BrowseIcon />}
           size="medium"
           tooltipText="Browse"
