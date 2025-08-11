@@ -18,6 +18,7 @@ import {
   selectTotalPages,
   selectCurrentPage,
   selectTotalTracks,
+  selectTopTracks,
 } from "./tracks/tracks.selector";
 
 export {
@@ -36,5 +37,6 @@ export {
   selectSortedPaginatedTracks,
   selectTotalPages,
   selectCurrentPage,
+  selectTopTracks,
   selectTotalTracks,
 };
