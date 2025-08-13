@@ -1,7 +1,7 @@
 import { ArrowIcon, FilterIcon } from "@/assets/icons";
 import { IconContainer } from "@/components";
 import { useSelector } from "react-redux";
-import { setSortTracks, type RootState } from "@/store";
+import { setCurrentPage, setSortTracks, type RootState } from "@/store";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import type { SortKeys } from "@/types";
@@ -31,6 +31,7 @@ export default function TracksFilter() {
       newDirection = "desc";
     }
 
+    dispatch(setCurrentPage(1));
     dispatch(setSortTracks({ key: newKey, direction: newDirection }));
     setIsVisible((prev) => !prev);
   };
