@@ -11,6 +11,7 @@ import DownloadIcon from "./DownloadIcon";
 import FacebookIcon from "./FacebookIcon";
 import FilterIcon from "./FilterIcon";
 import InstagramIcon from "./InstagramIcon";
+import PauseIcon from "./PauseIcon";
 import PlayIcon from "./PlayIcon";
 import QuestionMarkIcon from "./QuestionMarkIcon";
 import SearchIcon from "./SearchIcon";
@@ -34,6 +35,7 @@ export {
   FacebookIcon,
   FilterIcon,
   InstagramIcon,
+  PauseIcon,
   PlayIcon,
   QuestionMarkIcon,
   SearchIcon,
