@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // Differents sizes
 const sizes = [
@@ -57,7 +57,7 @@ export default function DynamicTitle({ text }: { text: string }) {
   };
 
   // Adjusts with each change of `text`
-  useEffect(() => {
+  useLayoutEffect(() => {
     adjustTextSize();
   }, [text]);
 
