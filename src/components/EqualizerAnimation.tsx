@@ -11,7 +11,7 @@ export default function EqualizerAnimation() {
       {delays.map((delay, i) => (
         <span
           key={i}
-          className={`w-0.5 bg-green [animation:equalizer_1s_infinite_ease-in-out] ${delay}`}
+          className={`w-0.5 bg-green min-h-0.5 rounded-t-[0.2px] [animation:equalizer_1s_infinite_ease-in-out] ${delay}`}
         />
       ))}
     </div>
