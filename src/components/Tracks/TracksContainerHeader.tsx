@@ -2,17 +2,18 @@ import type { RootState } from "@/store";
 import { useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { SortColumnIcon } from "@/components";
-import { setColumnWidth, setCurrentPage, setSortTracks } from "@/store";
-import type { SortKeys } from "@/types";
+import { SortDirectionIcon } from "@/components";
+import { setColumnWidth, setSortTracks } from "@/store";
+import type { SortTracksKeys } from "@/types";
 
 type Props = {
   album: boolean;
+  fixed?: boolean;
 };
 
 // THIS COMPONENT COMES FROM HELL !!!
 
-export default function ResizableHeader({ album }: Props) {
+export default function ResizableHeader({ album, fixed = false }: Props) {
   const dispatch = useDispatch();
   const [isHover, setIsHover] = useState(false);
   const { key, direction } = useSelector(
@@ -40,8 +41,8 @@ export default function ResizableHeader({ album }: Props) {
   ] as const;
 
   // Sort tracks
-  const handleSortTracks = (newKey: SortKeys, isFirstColumn = false) => {
-    dispatch(setCurrentPage(1));
+  const handleSortTracks = (newKey: SortTracksKeys, isFirstColumn = false) => {
+    if (fixed) return;
 
     // First column sorts
     if (isFirstColumn) {
@@ -109,6 +110,8 @@ export default function ResizableHeader({ album }: Props) {
 
   // On mouse down add event listernes for calculate position and get type
   const onMouseDown = (e: React.MouseEvent, type: "album" | "title") => {
+    if (fixed) return;
+
     lastXRef.current = e.clientX;
     activeTypeRef.current = type;
     document.body.style.cursor = "col-resize";
@@ -120,6 +123,8 @@ export default function ResizableHeader({ album }: Props) {
 
   // On mouse move, update columns width
   const onMouseMove = (e: MouseEvent) => {
+    if (fixed) return;
+
     // Calculate the difference in horizontal position between the current and the previous mouse position
     const delta = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
@@ -242,7 +247,7 @@ export default function ResizableHeader({ album }: Props) {
     onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
   }) => (
     <div
-      className="p-0.5 cursor-col-resize select-none"
+      className={`p-0.5 ${fixed ? "" : "cursor-col-resize"} select-none`}
       onMouseDown={onMouseDown}
     >
       <hr
@@ -272,7 +277,7 @@ export default function ResizableHeader({ album }: Props) {
           >
             <p>{firstColumnTitle}</p>
             {(key === "track_name" || key === "artists") && (
-              <SortColumnIcon direction={direction} />
+              <SortDirectionIcon direction={direction} />
             )}
           </div>
           <Bar onMouseDown={(e) => onMouseDown(e, "title")} />
@@ -289,7 +294,7 @@ export default function ResizableHeader({ album }: Props) {
               onClick={() => handleSortTracks("album")}
             >
               <p>Album</p>
-              {key === "album" && <SortColumnIcon direction={direction} />}
+              {key === "album" && <SortDirectionIcon direction={direction} />}
             </div>
             <Bar onMouseDown={(e) => onMouseDown(e, "album")} />
           </div>
@@ -304,7 +309,9 @@ export default function ResizableHeader({ album }: Props) {
             className="flex gap-2 items-center hover:text-white"
             onClick={() => handleSortTracks("play_count")}
           >
-            {key === "play_count" && <SortColumnIcon direction={direction} />}
+            {key === "play_count" && (
+              <SortDirectionIcon direction={direction} />
+            )}
             <p>Streams</p>
           </div>
         </div>
