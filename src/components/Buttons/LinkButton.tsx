@@ -59,6 +59,7 @@ export default function LinkButton({
       <Link
         className={baseClassNames}
         to={link}
+        onClick={(e) => e.stopPropagation()}
       >
         {label}
       </Link>
