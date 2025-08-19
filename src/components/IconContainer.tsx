@@ -1,8 +1,9 @@
 import { Tooltip } from "@/components";
 
 type Props = {
-  color: "grey" | "white" | "blue" | "green";
+  color: "grey" | "white" | "blue" | "green" | "black";
   disable?: boolean;
+  disableHover?: boolean;
   effect?: "scale";
   icon: React.ReactElement;
   size: "small" | "medium" | "large";
@@ -14,6 +15,7 @@ type Props = {
 export default function IconContainer({
   color,
   disable = false,
+  disableHover = false,
   effect,
   icon,
   size,
@@ -45,6 +47,10 @@ export default function IconContainer({
       ? "hover:scale-[1.04] active:scale-[1] group-hover:scale-[1.04] group-active:scale-[1]"
       : "";
 
+  const hoverClassNames = disableHover
+    ? ""
+    : "group-hover:text-white group-active:text-grey";
+
   const iconElement = (
     <div className="relative w-fit group">
       <div
@@ -54,7 +60,7 @@ export default function IconContainer({
       >
         <div
           className={`flex items-center gap-2 ${svgSize} ${svgColor} ${baseTransition} ${
-            !disable && "group-hover:text-white group-active:text-grey"
+            !disable && hoverClassNames
           }`}
         >
           {icon}
