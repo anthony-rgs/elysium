@@ -6,6 +6,7 @@ type Props = {
   cardText: string;
   cardTitle: string;
   cardSecondText?: string;
+  leaveSite?: boolean;
 };
 
 export default function InformationCard({
@@ -14,6 +15,7 @@ export default function InformationCard({
   cardText,
   cardTitle,
   cardSecondText,
+  leaveSite = false,
 }: Props) {
   const textClassNames =
     "text-[13px] font-circular-light w-fit tracking-[0.011em] sm:text-sm";
@@ -32,6 +34,7 @@ export default function InformationCard({
 
       <PrimaryButton
         label={buttonLabel}
+        leaveSite={leaveSite}
         link={buttonLink}
         size="medium"
       />
