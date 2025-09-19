@@ -49,12 +49,17 @@ body {
 
   --breakpoint-sm: 800px;
   --breakpoint-lg: 1025px;
+  --breakpoint-lg2: 1100px;
 
   --color-black: #000;
+
   --color-green: #1cb955;
+  --color-green-highlight: #3be477;
+  --color-green-press: #1abc54;
 
   --color-blue: #4bb3ff;
   --color-light-blue: #69bfff;
+  --color-blue-dark: #0074e0;
 
   --color-white: #fff;
   --color-white-hover: #f0f0f0;
@@ -65,6 +70,7 @@ body {
   --color-grey-dark: #727272;
 
   --color-container: #121212;
+  --color-container-light: #181818;
 
   --color-elevated-base: #1f1f1f;
   --color-elevated-highlight: #2a2a2a;

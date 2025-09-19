@@ -8,10 +8,18 @@ import { routes } from "./constants/routes.constants";
 import { tabs } from "./constants/tabs.constants";
 
 // Helpers
-import { filterTracksByQuery } from "./helpers/filterTracksByQuery.helpers";
+import {
+  filterAlbumsByQuery,
+  filterArtistsByQuery,
+  filterTracksByQuery,
+} from "./helpers/filterByQuery.helpers";
 import { formatDuration } from "./helpers/formatDuration.helpers";
 import { formatTrackStreams } from "./helpers/formatTrackStreams.helpers";
-import { sortTracks } from "./helpers/sortTracks.helpers";
+import {
+  sortAlbums,
+  sortArtists,
+  sortTracks,
+} from "./helpers/sortDatas.helpers";
 import { totalTracksDuration } from "./helpers/totalTracksDuration.hepers";
 
 export {
@@ -23,9 +31,13 @@ export {
   tabs,
 
   // Helpers
+  filterAlbumsByQuery,
+  filterArtistsByQuery,
   filterTracksByQuery,
   formatDuration,
   formatTrackStreams,
+  sortAlbums,
+  sortArtists,
   sortTracks,
   totalTracksDuration,
 };
