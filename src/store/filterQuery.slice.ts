@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface FilterState {
+interface FilterQueryState {
   query: string;
 }
 
-const initialState: FilterState = {
+const initialState: FilterQueryState = {
   query: "",
 };
 
-const filterTracksSlice = createSlice({
-  name: "filterTracks",
+const filterQuerySlice = createSlice({
+  name: "filterQuery",
   initialState,
   reducers: {
     setFilterQuery: (state, action) => {
@@ -21,6 +21,6 @@ const filterTracksSlice = createSlice({
   },
 });
 
-export const { setFilterQuery, clearFilterQuery } = filterTracksSlice.actions;
+export const { setFilterQuery, clearFilterQuery } = filterQuerySlice.actions;
 
-export default filterTracksSlice.reducer;
+export default filterQuerySlice.reducer;
