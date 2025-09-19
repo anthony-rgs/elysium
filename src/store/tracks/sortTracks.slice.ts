@@ -1,14 +1,14 @@
-import type { SortKeys } from "@/types";
+import type { SortTracksKeys } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface SortTracksState {
-  key: SortKeys;
+  key: SortTracksKeys;
   direction: "asc" | "desc";
 }
 
 const initialState: SortTracksState = {
-  key: "play_count",
+  key: "streams_count",
   direction: "desc",
 };
 
