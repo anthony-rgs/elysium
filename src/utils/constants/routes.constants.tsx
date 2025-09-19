@@ -1,4 +1,12 @@
-import { Album, Albums, Artist, Artists, Home, NotFound, Songs } from "@/pages";
+import {
+  SingleAlbum,
+  Albums,
+  SingleArtist,
+  Artists,
+  Home,
+  NotFound,
+  Songs,
+} from "@/pages";
 
 type Props = {
   path: string;
@@ -8,9 +16,9 @@ type Props = {
 export const routes: Props[] = [
   { path: "/", element: <Home /> },
   { path: "/albums", element: <Albums /> },
-  { path: "/albums/:id", element: <Album /> },
+  { path: "/albums/:id", element: <SingleAlbum /> },
   { path: "/artists", element: <Artists /> },
-  { path: "/artists/:id", element: <Artist /> },
+  { path: "/artists/:id", element: <SingleArtist /> },
   { path: "/songs", element: <Songs /> },
   { path: "*", element: <NotFound /> },
 ];
