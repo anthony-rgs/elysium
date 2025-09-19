@@ -34,8 +34,8 @@ export default function ResizableHeader({ album, fixed = false }: Props) {
 
   // First column differents steps
   const firstColumnSteps = [
-    { key: "track_name", direction: "asc" },
-    { key: "track_name", direction: "desc" },
+    { key: "name", direction: "asc" },
+    { key: "name", direction: "desc" },
     { key: "artists", direction: "asc" },
     { key: "artists", direction: "desc" },
   ] as const;
@@ -273,10 +273,10 @@ export default function ResizableHeader({ album, fixed = false }: Props) {
         >
           <div
             className="flex gap-2 items-center hover:text-white"
-            onClick={() => handleSortTracks("track_name", true)}
+            onClick={() => handleSortTracks("name", true)}
           >
             <p>{firstColumnTitle}</p>
-            {(key === "track_name" || key === "artists") && (
+            {(key === "name" || key === "artists") && (
               <SortDirectionIcon direction={direction} />
             )}
           </div>
@@ -291,10 +291,12 @@ export default function ResizableHeader({ album, fixed = false }: Props) {
           >
             <div
               className="flex gap-2 items-center hover:text-white"
-              onClick={() => handleSortTracks("album")}
+              onClick={() => handleSortTracks("album_name")}
             >
               <p>Album</p>
-              {key === "album" && <SortDirectionIcon direction={direction} />}
+              {key === "album_name" && (
+                <SortDirectionIcon direction={direction} />
+              )}
             </div>
             <Bar onMouseDown={(e) => onMouseDown(e, "album")} />
           </div>
@@ -307,9 +309,9 @@ export default function ResizableHeader({ album, fixed = false }: Props) {
         >
           <div
             className="flex gap-2 items-center hover:text-white"
-            onClick={() => handleSortTracks("play_count")}
+            onClick={() => handleSortTracks("streams_count")}
           >
-            {key === "play_count" && (
+            {key === "streams_count" && (
               <SortDirectionIcon direction={direction} />
             )}
             <p>Streams</p>

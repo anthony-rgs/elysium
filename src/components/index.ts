@@ -1,3 +1,7 @@
+// Artists Albums
+import ArtistAlbumCard from "./ArtistsAlbums/ArtistAlbumCard";
+import ArtistsAlbumsContainer from "./ArtistsAlbums/ArtistsAlbumsContainer";
+
 // Buttons
 import LinkButton from "./Buttons/LinkButton";
 import PrimaryButton from "./Buttons/PrimaryButton";
@@ -5,16 +9,13 @@ import SecondaryButton from "./Buttons/SecondaryButton";
 import TabButton from "./Buttons/TabButton";
 import TertiaryButton from "./Buttons/TertiaryButton";
 
-// Cards
-import InformationCard from "./Cards/InformationCard";
-
 // Footer
 import FooterColumn from "./Footer/FooterColumn";
 import FooterPagesContainer from "./Footer/FooterPagesContainer";
 
 // Search Bars
+import SearchBarFilter from "./SearchBars/SearchBarFilter";
 import SearchBarNav from "./SearchBars/SearchBarNav";
-import SearchBarTracks from "./SearchBars/SearchBarTracks";
 
 // Tooltips
 import Tooltip from "./Tooltips/Tooltip";
@@ -22,25 +23,34 @@ import TooltipLeave from "./Tooltips/TooltipLeave";
 
 // Tracks
 import TrackRow from "./Tracks/TrackRow";
+import TrackRowPlayButton from "./Tracks/TrackRowPlayButton";
 import TracksContainerHeader from "./Tracks/TracksContainerHeader";
-import TracksFilter from "./Tracks/TracksFilter";
-import TracksPagination from "./Tracks/TracksPagination";
+
+// Play Button
+import PlayButton from "./PlayButton/PlayButton";
+import PlayButtonBig from "./PlayButton/PlayButtonBig";
 
 // Other
 import Divider from "./Divider";
 import DynamicTitle from "./DynamicTitle";
 import EqualizerAnimation from "./EqualizerAnimation";
+import FilterData from "./FilterData";
 import IconContainer from "./IconContainer";
+import InformationCard from "./InformationCard";
 import InformationsContainer from "./InformationsContainer";
 import Layout from "./Layout";
 import MusicPageHeader from "./MusicPageHeader";
-import PlayButton from "./PlayButton";
 import SpotifyPlayerContainer from "./SpotifyPlayerContainer";
 import NavBar from "./NavBar";
 import TabsBar from "./TabsBar";
-import SortColumnIcon from "./SortColumnIcon";
+import ScrollToTop from "./ScrollToTop";
+import SortDirectionIcon from "./SortDirectionIcon";
 
 export {
+  // Artists Albums
+  ArtistAlbumCard,
+  ArtistsAlbumsContainer,
+
   // Buttons
   LinkButton,
   PrimaryButton,
@@ -48,16 +58,13 @@ export {
   TabButton,
   TertiaryButton,
 
-  // Cards
-  InformationCard,
-
   // Footer
   FooterColumn,
   FooterPagesContainer,
 
   // Search Bars
+  SearchBarFilter,
   SearchBarNav,
-  SearchBarTracks,
 
   // Tooltips
   Tooltip,
@@ -65,21 +72,26 @@ export {
 
   // Tracks
   TrackRow,
+  TrackRowPlayButton,
   TracksContainerHeader,
-  TracksFilter,
-  TracksPagination,
+
+  // Play Button
+  PlayButton,
+  PlayButtonBig,
 
   // Other
   Divider,
   DynamicTitle,
   EqualizerAnimation,
+  FilterData,
   IconContainer,
+  InformationCard,
   InformationsContainer,
   Layout,
   MusicPageHeader,
-  PlayButton,
   SpotifyPlayerContainer,
   NavBar,
   TabsBar,
-  SortColumnIcon,
+  ScrollToTop,
+  SortDirectionIcon,
 };

@@ -1,17 +1,20 @@
+import type { AlbumArtists, SingleArtistAlbumsArtistsData } from "@/types";
 import { LinkButton } from "@/components";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  artists?: string[];
+  artists?: AlbumArtists[] | SingleArtistAlbumsArtistsData[];
+  id: number;
   imageUrl: string;
   title: string;
   totalTracks: number;
-  year?: string;
+  year?: number;
 };
 
 export default function ArtistAlbumCard({
   artists,
+  id,
   imageUrl,
   title,
   totalTracks,
@@ -20,7 +23,7 @@ export default function ArtistAlbumCard({
   const navigate = useNavigate();
 
   const radius = artists ? "rounded-[6px]" : "rounded-full";
-  const link = `/${artists ? "albums" : "artists"}/artistsIDs`;
+  const link = `/${artists ? "albums" : "artists"}/${id}`;
 
   return (
     <div
@@ -60,15 +63,14 @@ export default function ArtistAlbumCard({
           {artists && (
             <>
               <span className="mx-1">-</span>
-
               {artists.map((artist, index) => (
                 <React.Fragment key={`${artist}-${index}`}>
                   <LinkButton
                     blank={false}
                     color="white"
                     font="light"
-                    label={artist}
-                    link={`/artists/artistId}`}
+                    label={artist.artist_name}
+                    link={`/artists/${artist?.artist_id}`}
                     size="small"
                   />
                   {index !== artists.length - 1 && <span>, </span>}

@@ -2,13 +2,9 @@ import { IconContainer } from "@/components";
 import { CrossIcon, SearchIcon } from "@/assets/icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  clearFilterQuery,
-  setFilterQuery,
-} from "@/store/tracks/filterTracks.slice";
-import { setCurrentPage } from "@/store";
+import { setFilterQuery, clearFilterQuery } from "@/store";
 
-export default function SearchBarTracks() {
+export default function SearchBarFilter() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -18,9 +14,9 @@ export default function SearchBarTracks() {
 
   // Clear input
   const handleClearInput = () => {
-    dispatch(setCurrentPage(1));
-    inputRef.current?.focus();
     dispatch(clearFilterQuery());
+
+    inputRef.current?.focus();
     setInputValue("");
   };
 
@@ -53,7 +49,6 @@ export default function SearchBarTracks() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch(setFilterQuery(inputValue));
-      dispatch(setCurrentPage(1));
     }, 300);
 
     return () => {
@@ -76,13 +71,13 @@ export default function SearchBarTracks() {
           icon={<SearchIcon />}
           size="small"
           tooltipPosition="top"
-          tooltipText="Search in playlist"
+          tooltipText="Search in page"
         />
 
         <input
           className="text-sm outline-none text-grey w-full max-w-[280px] placeholder-grey z-1"
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Search in playlist"
+          placeholder="Search in page"
           ref={inputRef}
           type="text"
           value={inputValue}
@@ -119,7 +114,7 @@ export default function SearchBarTracks() {
             icon={<SearchIcon />}
             size="small"
             tooltipPosition="top"
-            tooltipText={!isOpen ? "Search in playlist" : undefined}
+            tooltipText={!isOpen ? "Search in page" : undefined}
           />
         </div>
       </div>

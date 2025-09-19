@@ -1,95 +1,132 @@
 import React from "react";
-import { EqualizerAnimation, LinkButton, PlayButton } from "@/components";
+import { IconContainer, LinkButton, TrackRowPlayButton } from "@/components";
 import { useSelector } from "react-redux";
-import type { RootState } from "@/store";
+import {
+  hideIframeContainer,
+  showIframeContainer,
+  type RootState,
+} from "@/store";
 import { formatTrackStreams } from "@/utils";
+import { PauseIcon, PlayIcon } from "@/assets/icons";
+import { useDispatch } from "react-redux";
+import type { TitleArtists } from "@/types";
+import { Link } from "react-router-dom";
 
 type Props = {
-  id: number;
+  coverLink?: string;
+  customWidth?: boolean;
+  id?: number;
+  playIcon?: boolean;
   iframeMusic: string;
   imgURL?: string;
   musicName: string;
-  musicLink: string;
-  artistsNames: string[];
-  artistsLinks: string;
+  artists: TitleArtists[];
   albumName?: string;
   albumLink?: string;
   musicStreams: number;
 };
 
 export default function TrackRow({
+  coverLink,
+  customWidth = true,
   id,
+  playIcon = false,
   iframeMusic,
   imgURL,
   musicName,
-  musicLink,
-  artistsNames,
-  artistsLinks,
+  artists,
   albumName,
   albumLink,
   musicStreams,
 }: Props) {
+  const dispatch = useDispatch();
   const { iframe } = useSelector((state: RootState) => state.spotifyPlayer);
-
   const { title, album, stream } = useSelector(
     (state: RootState) => state.columns
   );
 
+  const isPlaying = iframeMusic === iframe;
+
+  const handleImageIframeContainer = () => {
+    if (isPlaying) {
+      dispatch(hideIframeContainer());
+    } else {
+      dispatch(showIframeContainer(iframeMusic));
+    }
+  };
+
+  const artistsNames = artists?.map((artist) => artist.artist_name);
+
   return (
-    <div className="group rounded h-14 flex items-center gap-4 px-4 hover:bg-elevated-highlight">
-      <div className="flex w-4 min-w-4 h-4 min-h-4 justify-center items-center ">
-        <div>
-          {iframeMusic === iframe ? (
-            <EqualizerAnimation />
-          ) : (
-            <p className="text-grey font-circular-book flex group-hover:hidden">
-              {id}
-            </p>
-          )}
-        </div>
+    <div
+      className={`group rounded h-14 flex items-center gap-4 ${
+        id ? "px-4" : "px-[10px]"
+      } hover:bg-elevated-highlight`}
+    >
+      {id && (
+        <TrackRowPlayButton
+          artistsNames={artistsNames}
+          id={id}
+          isPlaying={isPlaying}
+          iframeMusic={iframeMusic}
+          musicName={musicName}
+        />
+      )}
 
-        {iframeMusic !== iframe && (
-          <div className="group-hover:flex hidden">
-            <PlayButton
-              iframe={iframeMusic}
-              artists={artistsNames}
-              track={musicName}
-            />
-          </div>
-        )}
-      </div>
-
-      {/* title column */}
+      {/* Title column */}
       <div
         className="flex gap-3 items-center truncate pr-3"
-        style={{ width: `${title}%` }}
+        style={{ width: `${customWidth ? title : "100"}%` }}
       >
         {imgURL && (
-          <img
-            alt="Album img"
-            className="rounded h-10 w-10"
-            src={imgURL}
-          />
+          <div className="relative select-none h-10 w-10 min-h-10 min-w-10">
+            {(isPlaying || playIcon) && !id && (
+              <div
+                className="rounded absolute h-10 w-10 top-0 left-0 flex items-center justify-center opacity-0 group-hover:shadow-[inset_0_0_20px_15px_rgba(0,0,0,0.70)] group-hover:opacity-100"
+                onClick={() => handleImageIframeContainer()}
+              >
+                <IconContainer
+                  color="white"
+                  icon={isPlaying ? <PauseIcon /> : <PlayIcon />}
+                  size="small"
+                />
+              </div>
+            )}
+
+            <Link to={coverLink ? coverLink : ""}>
+              <img
+                alt="Album img"
+                className="rounded"
+                src={imgURL}
+              />
+            </Link>
+          </div>
         )}
 
         <div className="group-hover:text-white truncate">
-          <p className="font-circular-book tracking-[-0.012em]">{musicName}</p>
+          <p
+            className={`font-circular-book tracking-[-0.012em] truncate ${
+              isPlaying ? "text-green" : "text-white"
+            }`}
+          >
+            {musicName}
+          </p>
 
-          {artistsNames && artistsLinks && (
+          {artists && (
             <div className="flex flex-row gap-1">
-              {artistsNames.map((artist, index) => (
+              {artists.map((artist, index) => (
                 <React.Fragment key={`${artist}-${index}`}>
                   <div className="flex">
                     <LinkButton
                       blank={false}
                       color="grey"
                       font="book"
-                      label={artist}
-                      link={artistsLinks}
+                      label={artist.artist_name}
+                      link={`/artists/${artist.id}`}
                       size={"small"}
                     />
 
-                    {index !== artistsNames.length - 1 && (
+                    {index !== artists.length - 1 && (
                       <p className="text-grey text-sm">,</p>
                     )}
                   </div>
@@ -112,18 +149,18 @@ export default function TrackRow({
             font="book"
             label={albumName}
             link={albumLink}
-            size={"small"}
+            size="small"
           />
         </div>
       )}
 
-      {/* streams column */}
+      {/* Streams column */}
       <div
         className="flex justify-end truncate"
-        style={{ width: `${stream}%` }}
+        style={{ width: `${customWidth ? stream : "60"}%` }}
       >
         <p className="font-circular-book text-grey text-sm group-hover:text-white">
-          {formatTrackStreams({ streams: musicStreams })}
+          {formatTrackStreams(musicStreams)}
         </p>
       </div>
     </div>

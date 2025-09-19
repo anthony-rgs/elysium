@@ -84,7 +84,7 @@ export default function InformationsContainer() {
           }`}
         >
           <div className="flex justify-between items-center h-[35px]">
-            <h2 className="font-circular-medium">Your Library</h2>
+            <h2 className="font-circular-medium">Informations</h2>
             <IconContainer
               color="grey"
               icon={<QuestionMarkIcon />}
@@ -102,16 +102,42 @@ export default function InformationsContainer() {
         >
           <div className="grid gap-6 py-4 px-2">
             <InformationCard
-              buttonLabel="Create playlist"
-              buttonLink="/"
-              cardText="It's easy, we'll help you"
-              cardTitle="Create your first playlist"
+              cardTitle="Unofficial site — not affiliated with Spotify"
+              cardText="This independent project catalogs tracks surpassing 1 billion streams, along with their albums and artists"
+              buttonLabel="Go to Spotify"
+              buttonLink="https://open.spotify.com"
+              leaveSite
             />
+
             <InformationCard
-              buttonLabel="Browse podcasts"
-              buttonLink="/"
-              cardText="We'll keep you updated on new episodes"
-              cardTitle="Let's find some podcasts to follow"
+              cardTitle="About me"
+              cardText="This is a personal project by Anthony Ringressi, Front-End Developer"
+              cardSecondText="Actively looking for a Front-End role"
+              buttonLabel="View my LinkedIn"
+              buttonLink="https://www.linkedin.com/in/anthony-ringressi"
+            />
+
+            <InformationCard
+              cardTitle="Code - Web App"
+              cardText="Frontend built with Vite + React (TypeScript), Tailwind, Redux Toolkit"
+              buttonLabel="GitHub"
+              buttonLink="https://github.com/anthony-rgs/elysium"
+            />
+
+            <InformationCard
+              cardTitle="Code - Scraper"
+              cardText="Python scraper using Playwright + Chromium"
+              cardSecondText="He can collects data from albums and playlists on Apple Music, Spotify, and Deezer"
+              buttonLabel="GitHub"
+              buttonLink="https://github.com/anthony-rgs/artemis"
+            />
+
+            <InformationCard
+              cardTitle="Code - Infra (API · DB · Cron · Scraper)"
+              cardText="Dockerized stack: FastAPI, PostgreSQL, scheduled jobs, ingestion scripts"
+              cardSecondText="Includes the scraper (cloned as part of this infra)"
+              buttonLabel="GitHub"
+              buttonLink="https://github.com/anthony-rgs/olympe"
             />
           </div>
         </div>

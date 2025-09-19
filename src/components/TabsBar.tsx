@@ -64,7 +64,7 @@ export default function TabsBar() {
         <div
           className={`${
             showText ? "opacity-100 cursor-pointer" : "opacity-0"
-          } group`}
+          } group truncate`}
           onClick={() => handleScrollToTop()}
         >
           <p className="font-circular-bold text-[21px] transition-opacity delay-100 truncate group-hover:underline">

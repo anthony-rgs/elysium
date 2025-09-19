@@ -1,13 +1,6 @@
-import {
-  DynamicTitle,
-  LinkButton,
-  IconContainer,
-  TracksPagination,
-  TracksFilter,
-  SearchBarTracks,
-} from "@/components";
+import { DynamicTitle, LinkButton, IconContainer } from "@/components";
 import { VerifiedIcon } from "@/assets/icons";
-import { formatDuration } from "@/utils";
+import { formatDuration, formatTrackStreams } from "@/utils";
 
 type Props = {
   pageType: "artist" | "album" | "billions-club";
@@ -15,11 +8,12 @@ type Props = {
   surtitle?: string;
   title: string;
   subtitle?: string;
-  monthlyListeners?: string;
+  monthlyListeners?: number;
   additionalData?: {
-    imgURL: string;
-    linkLabel: string;
-    linkURL: string;
+    imgURL?: string;
+    leaveSite?: boolean;
+    linksLabel: string[];
+    linksURL: string[];
     year?: string;
     songs: number;
     time: number;
@@ -79,26 +73,41 @@ export default function MusicPageHeader({
           {subtitle && <p className="truncate text-grey-light">{subtitle}</p>}
 
           {monthlyListeners && (
-            <p className="text-base">{monthlyListeners} monthly listeners</p>
+            <p className="text-base">
+              {formatTrackStreams(monthlyListeners)} monthly listeners
+            </p>
           )}
 
           {additionalData && (
             <div className="flex flex-wrap items-center text-grey-light mt-2">
-              <div className="flex items-center gap-2">
-                <img
-                  className="h-6 w-6 rounded-full"
-                  src={additionalData.imgURL}
-                  alt="music logo"
-                />
+              <div className="flex items-center">
+                {additionalData?.imgURL && (
+                  <img
+                    className="h-6 w-6 rounded-full mr-2"
+                    src={additionalData.imgURL}
+                    alt="music logo"
+                  />
+                )}
 
-                <LinkButton
-                  color="white"
-                  font="book"
-                  label={additionalData.linkLabel}
-                  leaveSite
-                  link={additionalData.linkURL}
-                  size="small"
-                />
+                {additionalData.linksLabel.map((label, index) => (
+                  <div
+                    className="flex items-center"
+                    key={label + index}
+                  >
+                    <LinkButton
+                      color="white"
+                      font="book"
+                      label={label}
+                      leaveSite={additionalData?.leaveSite}
+                      link={additionalData?.linksURL[index]}
+                      size="small"
+                    />
+
+                    {index !== additionalData.linksLabel.length - 1 && (
+                      <p className="text-[8px] text-white mx-1">•</p>
+                    )}
+                  </div>
+                ))}
               </div>
 
               {additionalData.year && (
@@ -108,38 +117,28 @@ export default function MusicPageHeader({
                 </>
               )}
 
-              <p className="text-[8px] mx-1">•</p>
+              {additionalData?.time > 0 && (
+                <>
+                  <p className="text-[8px] mx-1">•</p>
 
-              <p className="text-grey-light">
-                {`${additionalData.songs.toString()} song${
-                  additionalData.songs > 1 ? "s" : ""
-                },`}
-              </p>
+                  <p className="text-grey-light">
+                    {`${additionalData.songs.toString()} song${
+                      additionalData.songs > 1 ? "s" : ""
+                    },`}
+                  </p>
 
-              <p className="text-grey-light ml-1">
-                {`${" "} ${formatedTime}
+                  <p className="text-grey-light ml-1">
+                    {`${" "} ${formatedTime}
                 `}
-              </p>
+                  </p>
+                </>
+              )}
             </div>
           )}
         </div>
       </div>
 
       <div className="h-44 absolute w-full bg-[linear-gradient(rgba(53,53,53,0.7),transparent)]" />
-
-      {additionalData && (
-        <div className="p-5 flex justify-between items-center gap-4 ">
-          <TracksPagination />
-
-          <div className="flex items-center">
-            <SearchBarTracks />
-
-            <div className="ml-4">
-              <TracksFilter />
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
