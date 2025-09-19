@@ -1,4 +1,4 @@
-import type { Album, Artist, Track } from "@/types";
+import type { Album, Artist, Title } from "@/types";
 
 // Albums
 export const filterAlbumsByQuery = (
@@ -9,8 +9,13 @@ export const filterAlbumsByQuery = (
 
   return albums.filter(
     (album) =>
-      album.album_name.toLowerCase().includes(loweredQuery) ||
-      album.artists_names.join("")?.toLowerCase().includes(loweredQuery)
+      album.title?.toLowerCase().includes(loweredQuery) ||
+      album?.artists
+        .map((artist) => artist.artist_name)
+        ?.join("")
+        ?.toLowerCase()
+        .includes(loweredQuery) ||
+      album.release_year.toString()?.includes(loweredQuery)
   );
 };
 
@@ -22,22 +27,23 @@ export const filterArtistsByQuery = (
   const loweredQuery = query.toLowerCase().trim();
 
   return artists.filter((artist) =>
-    artist.artist_name.toLowerCase().includes(loweredQuery)
+    artist?.artist_name?.toLowerCase().includes(loweredQuery)
   );
 };
 
 // Tracks
 export const filterTracksByQuery = (
-  tracks: Track[],
+  tracks: Title[],
   query: string
-): Track[] => {
+): Title[] => {
   const loweredQuery = query.toLowerCase().trim();
 
   return tracks.filter((track) => {
+    const artistsNames = track.artists.map((artist) => artist.artist_name);
     return (
-      track.track_name.toLowerCase().includes(loweredQuery) ||
-      track.album.toLowerCase().includes(loweredQuery) ||
-      track.artists.join()?.toLowerCase().includes(loweredQuery)
+      track.name.toLowerCase().includes(loweredQuery) ||
+      track.album_name.toLowerCase().includes(loweredQuery) ||
+      artistsNames.join()?.toLowerCase().includes(loweredQuery)
     );
   });
 };
