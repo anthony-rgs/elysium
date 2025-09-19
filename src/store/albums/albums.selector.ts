@@ -19,7 +19,5 @@ export const selectSortedAlbums = (state: RootState): Album[] => {
 export const selectedAlbum =
   (id: string | undefined) =>
   (state: RootState): Album | undefined => {
-    return state.albums.allAlbums.find(
-      (album) => album.album_id === Number(id)
-    );
+    return state.albums.allAlbums.find((album) => album.id === Number(id));
   };

@@ -1,40 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Album } from "@/types";
+import { fetchAlbums, fetchAlbumTitles } from "./albums.actions";
+import type { Album, AlbumAllData } from "@/types";
 
 type AlbumsState = {
   allAlbums: Album[];
+  albumTitles: AlbumAllData | null;
 };
 
 const initialState: AlbumsState = {
   allAlbums: [],
-};
-
-type SetAlbumsPayload = {
-  albums: Album[];
-  shuffle?: boolean;
+  albumTitles: null,
 };
 
 const albumsSlice = createSlice({
   name: "albums",
   initialState,
-  reducers: {
-    setAlbums: (state, action: PayloadAction<SetAlbumsPayload>) => {
-      const { albums, shuffle } = action.payload;
-
-      if (shuffle) {
-        const shuffled = [...albums];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        state.allAlbums = shuffled;
-      } else {
-        state.allAlbums = albums;
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchAlbums.fulfilled, (state, action) => {
+      const albums = action.payload;
+      const shuffled = [...albums];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
-    },
+      state.allAlbums = shuffled;
+    });
+    builder.addCase(fetchAlbumTitles.fulfilled, (state, action) => {
+      state.albumTitles = action.payload;
+    });
   },
 });
 
-export const { setAlbums } = albumsSlice.actions;
 export default albumsSlice.reducer;
