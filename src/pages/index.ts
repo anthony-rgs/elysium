@@ -1,9 +1,9 @@
-import Album from "./Album";
+import SingleAlbum from "./SingleAlbum";
 import Albums from "./Albums";
-import Artist from "./Artist";
+import SingleArtist from "./SingleArtist";
 import Artists from "./Artists";
 import Home from "./Home";
 import NotFound from "./NotFound";
 import Songs from "./Songs";
 
-export { Album, Albums, Artist, Artists, Home, NotFound, Songs };
+export { SingleAlbum, Albums, SingleArtist, Artists, Home, NotFound, Songs };

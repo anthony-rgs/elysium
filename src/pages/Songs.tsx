@@ -1,42 +1,62 @@
 import {
   MusicPageHeader,
+  SearchBarFilter,
   TrackRow,
   TracksContainerHeader,
-  TracksPagination,
+  FilterData,
+  PlayButtonBig,
 } from "@/components";
-import { useEffect, useRef, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useSelector } from "react-redux";
 import {
-  selectTotalTracks,
-  selectSortedPaginatedTracks,
   setPageTitle,
   type RootState,
+  clearFilterQuery,
+  selectTotalTracksTime,
+  setSortTracks,
 } from "@/store";
 import { useDispatch } from "react-redux";
-import { totalTracksDuration } from "@/utils";
+import type { SortTracksKeys } from "@/types";
+import { Virtuoso, type VirtuosoHandle } from "react-virtuoso";
+import { ScrollParentContext } from "@/contexts";
+import { selectSortedTracks } from "@/store/tracks/tracks.selector";
 
 export default function Songs() {
   const dispatch = useDispatch();
   const [isSticky, setIsSticky] = useState(false);
-  const [totalDuration, setTotalDuration] = useState(0);
 
-  const sortedPaginatedTracks = useSelector(selectSortedPaginatedTracks);
-  const totalTracks = useSelector(selectTotalTracks);
+  const totalTracksTime = useSelector(selectTotalTracksTime);
+  const sortedTracks = useSelector(selectSortedTracks);
+
   const { cover_url, cover_artist } = useSelector(
-    (state: RootState) => state.playlitstCover
+    (state: RootState) => state.tracksMeta
   );
 
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  // Set total tracks duraction
-  useEffect(() => {
-    setTotalDuration(totalTracksDuration(sortedPaginatedTracks));
-  }, [sortedPaginatedTracks]);
+  const scrollParent = useContext(ScrollParentContext);
+  const virtuosoRef = useRef<VirtuosoHandle | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Update page title
     dispatch(setPageTitle("BILLIONS CLUB"));
+    dispatch(clearFilterQuery());
+  }, []);
 
+  // Reset sort on unmount
+  useEffect(() => {
+    return () => {
+      dispatch(setSortTracks({ key: "streams_count", direction: "desc" }));
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
     // Sticky bar when sentinel leav page
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -57,6 +77,13 @@ export default function Songs() {
     };
   }, []);
 
+  const filterChoices = [
+    { key: "name", label: "Title" },
+    { key: "artists", label: "Artist" },
+    { key: "album_name", label: "Album" },
+    { key: "streams_count", label: "Streams" },
+  ] as const satisfies readonly { key: SortTracksKeys; label: string }[];
+
   return (
     <div className="relative">
       <MusicPageHeader
@@ -68,23 +95,47 @@ export default function Songs() {
         additionalData={{
           imgURL:
             "https://i.scdn.co/image/ab67757000003b8255c25988a6ac314394d3fbf5",
-          linkLabel: "Spotify",
-          linkURL: "https://open.spotify.com/user/spotify",
-          songs: totalTracks,
-          time: totalDuration,
+          leaveSite: true,
+          linksLabel: ["Spotify"],
+          linksURL: ["https://open.spotify.com/user/spotify"],
+          songs: sortedTracks.length,
+          time: totalTracksTime,
         }}
         radius="rounded"
       />
 
+      <div className="p-5 flex justify-between items-center gap-4 relative z-2">
+        <div>
+          {sortedTracks.length > 0 && (
+            <PlayButtonBig
+              artists={[""]}
+              iframeMusic={sortedTracks[0]?.iframe}
+              track={sortedTracks[0]?.name}
+              size="big"
+            />
+          )}
+        </div>
+        <div className="flex items-center">
+          <SearchBarFilter />
+          <div className="ml-4">
+            <FilterData
+              page="songs"
+              choices={filterChoices}
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Sentinel for sticky bar with columns */}
       <div
         ref={sentinelRef}
-        className="absolute mt-[-58px]"
+        className="absolute mt-[-55px]"
       />
 
-      {sortedPaginatedTracks.length > 0 && (
+      {sortedTracks.length > 0 && (
         <>
           <div className="px-5 pb-5">
+            {/* header sticky garde le même contexte de scroll (window) */}
             <div
               className={`sticky top-14 mx-[-20px] mb-[-4px] px-5 ${
                 isSticky ? "bg-elevated-base z-4" : "bg-transparent z-1"
@@ -93,26 +144,33 @@ export default function Songs() {
               <TracksContainerHeader album />
             </div>
 
+            {/* Tracks */}
             <div className="mt-5 relative z-1">
-              {sortedPaginatedTracks.map((data) => (
-                <TrackRow
-                  id={data.index}
-                  iframeMusic={data.track_iframe}
-                  imgURL={data.track_img}
-                  musicName={data.track_name}
-                  musicLink={data.track_link}
-                  artistsNames={data.artists}
-                  artistsLinks="/"
-                  albumName={data.album}
-                  albumLink={data.album_link}
-                  musicStreams={data.play_count}
+              {scrollParent && (
+                <Virtuoso
+                  ref={virtuosoRef}
+                  computeItemKey={(i) => (sortedTracks[i]?.iframe, i)}
+                  customScrollParent={scrollParent}
+                  totalCount={sortedTracks.length}
+                  itemContent={(index) => {
+                    const track = sortedTracks[index];
+                    return (
+                      <TrackRow
+                        key={index}
+                        id={index + 1}
+                        iframeMusic={track.iframe}
+                        imgURL={track.cover_url}
+                        musicName={track.name}
+                        artists={track.artists}
+                        albumName={track.album_name}
+                        albumLink={`/albums/${track.album_id}`}
+                        musicStreams={track.streams_count}
+                      />
+                    );
+                  }}
                 />
-              ))}
+              )}
             </div>
-          </div>
-
-          <div className="flex justify-center mb-5">
-            <TracksPagination scrollTop />
           </div>
         </>
       )}
