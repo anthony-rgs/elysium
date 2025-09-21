@@ -5,13 +5,13 @@ import type { Album, AlbumAllData } from "@/types";
 type AlbumsState = {
   allAlbums: Album[];
   albumTitles: AlbumAllData | null;
-  error: boolean;
+  status: string;
 };
 
 const initialState: AlbumsState = {
   allAlbums: [],
   albumTitles: null,
-  error: false,
+  status: "idle",
 };
 
 const albumsSlice = createSlice({
@@ -19,6 +19,10 @@ const albumsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Albums
+    builder.addCase(fetchAlbums.pending, (state) => {
+      state.status = "loading";
+    });
     builder.addCase(fetchAlbums.fulfilled, (state, action) => {
       const albums = action.payload;
       const shuffled = [...albums];
@@ -27,13 +31,22 @@ const albumsSlice = createSlice({
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       state.allAlbums = shuffled;
+      state.status = "succeeded";
+    });
+    builder.addCase(fetchAlbums.rejected, (state) => {
+      state.status = "failed";
+    });
+
+    // Single Album
+    builder.addCase(fetchAlbumTitles.pending, (state) => {
+      state.status = "loading";
     });
     builder.addCase(fetchAlbumTitles.fulfilled, (state, action) => {
       state.albumTitles = action.payload;
-      state.error = false;
+      state.status = "succeeded";
     });
     builder.addCase(fetchAlbumTitles.rejected, (state) => {
-      state.error = true;
+      state.status = "failed";
     });
   },
 });

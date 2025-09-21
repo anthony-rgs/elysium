@@ -3,7 +3,12 @@ import {
   SearchBarFilter,
   FilterData,
 } from "@/components";
-import { clearFilterQuery, selectSortedArtists, setPageTitle } from "@/store";
+import {
+  clearFilterQuery,
+  selectSortedArtists,
+  setPageTitle,
+  type RootState,
+} from "@/store";
 import type { SortArtistsKeys } from "@/types";
 import { useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
@@ -12,6 +17,7 @@ import { useDispatch } from "react-redux";
 export default function Artists() {
   const dispatch = useDispatch();
   const sortedArtists = useSelector(selectSortedArtists);
+  const artistStatus = useSelector((state: RootState) => state.artists.status);
 
   useLayoutEffect(() => {
     dispatch(setPageTitle("Artists"));
@@ -22,6 +28,10 @@ export default function Artists() {
     { key: "tracks", label: "Total tracks" },
     { key: "artist_name", label: "Artist" },
   ] as const satisfies readonly { key: SortArtistsKeys; label: string }[];
+
+  if (artistStatus === "loading") {
+    return <p className="h-screen w-full bg-container" />;
+  }
 
   return (
     <div className="pb-5">

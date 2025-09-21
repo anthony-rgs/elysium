@@ -5,13 +5,13 @@ import { fetchArtistFull, fetchArtists } from "./artists.actions";
 type ArtistsState = {
   allArtists: Artist[];
   artistFullData: ArtistAllData | null;
-  error: boolean;
+  status: string;
 };
 
 const initialState: ArtistsState = {
   allArtists: [],
   artistFullData: null,
-  error: false,
+  status: "idle",
 };
 
 const artistsSlice = createSlice({
@@ -19,6 +19,10 @@ const artistsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // Artists
+    builder.addCase(fetchArtists.pending, (state) => {
+      state.status = "loading";
+    });
     builder.addCase(fetchArtists.fulfilled, (state, action) => {
       // Shuffle artists the first time
       const artists = action.payload;
@@ -28,13 +32,22 @@ const artistsSlice = createSlice({
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
       state.allArtists = shuffled;
+      state.status = "succeeded";
+    });
+    builder.addCase(fetchArtists.rejected, (state) => {
+      state.status = "failed";
+    });
+
+    // Single Artist
+    builder.addCase(fetchArtistFull.pending, (state) => {
+      state.status = "loading";
     });
     builder.addCase(fetchArtistFull.fulfilled, (state, action) => {
       state.artistFullData = action.payload;
-      state.error = false;
+      state.status = "succeeded";
     });
     builder.addCase(fetchArtistFull.rejected, (state) => {
-      state.error = true;
+      state.status = "failed";
     });
   },
 });

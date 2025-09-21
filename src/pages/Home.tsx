@@ -5,7 +5,6 @@ import {
   TrackRow,
 } from "@/components";
 import useElementWidth from "@/hooks/useElementWidth";
-
 import { selectTopTracks, setPageTitle, type RootState } from "@/store";
 import { formatTrackStreams } from "@/utils";
 import React, { useEffect, useRef } from "react";
@@ -18,6 +17,7 @@ export default function Home() {
   const artists = useSelector((state: RootState) => state.artists.allArtists);
   const albums = useSelector((state: RootState) => state.albums.allAlbums);
   const iframe = useSelector((state: RootState) => state.spotifyPlayer.iframe);
+  const artistsStatus = useSelector((state: RootState) => state.artists.status);
 
   const topTracks = useSelector(selectTopTracks);
   const topTrack = topTracks[0];
@@ -30,8 +30,8 @@ export default function Home() {
   const boxRef = useRef<HTMLDivElement>(null);
   const { width } = useElementWidth(boxRef);
 
-  if (!topTracks) {
-    return null;
+  if (artistsStatus === "loading" || !topTracks) {
+    return <p className="h-screen w-full bg-container" />;
   }
 
   const minWidth = width < 850;
@@ -46,63 +46,68 @@ export default function Home() {
           className={`min-w-[400px] flex-1  ${minWidth ? "w-[70%]" : "flex-1"}`}
         >
           <h2 className="font-circular-medium text-[24px] w-fit">Top result</h2>
-
           <div className="group rounded-lg mt-2 bg-container-light p-5 transition-colors ease-in-out delay-100 cursor-pointer relative hover:bg-elevated-highlight">
-            <Link to={`/albums/${topTrack?.id}`}>
-              <img
-                alt="Top result track"
-                className="w-[92px] h-[92px] rounded-[6px] shadow-[0_8px_24px_rgba(0,0,0,.5)]"
-                src={topTrack?.cover_url}
-              />
-            </Link>
+            {topTrack && (
+              <>
+                <Link to={`/albums/${topTrack?.id}`}>
+                  <img
+                    alt="Top result track"
+                    className="w-[92px] h-[92px] rounded-[6px] shadow-[0_8px_24px_rgba(0,0,0,.5)]"
+                    src={topTrack?.cover_url}
+                  />
+                </Link>
 
-            <h3 className="font-circular-bold text-[32px] tracking-[-0.017em] pb-1 pt-5">
-              {topTrack?.name}
-            </h3>
+                <h3 className="font-circular-bold text-[32px] tracking-[-0.017em] pb-1 pt-5">
+                  {topTrack?.name}
+                </h3>
 
-            <div className="flex gap-1 text-sm text-grey items-center w-fit">
-              <p className="">Song</p>
-              <p className="text-[8px]">•</p>
-              <p className="">{formatTrackStreams(topTrack?.streams_count)}</p>
-              <p className="text-[8px]">•</p>
-              <div className="flex flex-row gap-1">
-                {topTrack?.artists?.map((artist, index) => (
-                  <React.Fragment key={`${artist.id}-${index}`}>
-                    <div className="flex">
-                      <LinkButton
-                        blank={false}
-                        color="white"
-                        font="light"
-                        label={artist.artist_name}
-                        link={`/artists/${artist.id}`}
-                        size="small"
-                      />
+                <div className="flex gap-1 text-sm text-grey items-center w-fit">
+                  <p className="">Song</p>
+                  <p className="text-[8px]">•</p>
+                  <p className="">
+                    {formatTrackStreams(topTrack?.streams_count)}
+                  </p>
+                  <p className="text-[8px]">•</p>
+                  <div className="flex flex-row gap-1">
+                    {topTrack?.artists?.map((artist, index) => (
+                      <React.Fragment key={`${artist.id}-${index}`}>
+                        <div className="flex">
+                          <LinkButton
+                            blank={false}
+                            color="white"
+                            font="light"
+                            label={artist.artist_name}
+                            link={`/artists/${artist.id}`}
+                            size="small"
+                          />
 
-                      {index !== topTrack?.artists.length - 1 && (
-                        <p className="">,</p>
+                          {index !== topTrack?.artists.length - 1 && (
+                            <p className="">,</p>
+                          )}
+                        </div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+
+                  <div
+                    className={`transition-all absolute right-5 delay-100 group-hover:bottom-5 group-hover:opacity-100 ${
+                      iframe === topTrack?.iframe
+                        ? "opacity-100 bottom-5"
+                        : "opacity-0 bottom-3"
+                    }`}
+                  >
+                    <PlayButtonBig
+                      artists={topTrack?.artists.map(
+                        (artist) => artist.artist_name
                       )}
-                    </div>
-                  </React.Fragment>
-                ))}
-              </div>
-
-              <div
-                className={`transition-all absolute right-5 delay-100 group-hover:bottom-5 group-hover:opacity-100 ${
-                  iframe === topTrack?.iframe
-                    ? "opacity-100 bottom-5"
-                    : "opacity-0 bottom-3"
-                }`}
-              >
-                <PlayButtonBig
-                  artists={topTrack?.artists.map(
-                    (artist) => artist.artist_name
-                  )}
-                  iframeMusic={topTrack?.iframe}
-                  size="small"
-                  track={topTrack?.name}
-                />
-              </div>
-            </div>
+                      iframeMusic={topTrack?.iframe}
+                      size="small"
+                      track={topTrack?.name}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </section>
 

@@ -14,13 +14,13 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function SingleAlbum() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const albumError = useSelector((state: RootState) => state.albums.error);
+  const albumStatus = useSelector((state: RootState) => state.albums.status);
 
   useEffect(() => {
-    if (albumError) {
+    if (albumStatus === "failed") {
       navigate("/notFound");
     }
-  }, [albumError]);
+  }, [albumStatus]);
 
   const { id } = useParams();
   const albumId = Number(id);
@@ -35,7 +35,9 @@ export default function SingleAlbum() {
     dispatch(setPageTitle(data?.album?.title));
   }, [data]);
 
-  if (!data) return <p className="p-5">loading...</p>;
+  if (albumStatus === "loading" || !data) {
+    return <p className="h-screen w-full bg-container" />;
+  }
 
   const albumData = data?.album;
   const titlesData = data?.titles;

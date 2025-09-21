@@ -17,13 +17,13 @@ import { useNavigate, useParams } from "react-router-dom";
 export default function SingleArtist() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const artistError = useSelector((state: RootState) => state.artists.error);
+  const artistStatus = useSelector((state: RootState) => state.artists.status);
 
   useEffect(() => {
-    if (artistError) {
+    if (artistStatus === "failed") {
       navigate("/notFound");
     }
-  }, [artistError]);
+  }, [artistStatus]);
 
   const { id } = useParams();
   const artistID = Number(id);
@@ -38,7 +38,9 @@ export default function SingleArtist() {
     dispatch(setPageTitle(data?.artist?.artist_name));
   }, [data]);
 
-  if (!data) return <p className="p-5">loading...</p>;
+  if (artistStatus === "loading" || !data) {
+    return <p className="h-screen w-full bg-container" />;
+  }
 
   const artistData = data.artist;
   const titlesData = data.titles;
