@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { pagesFooterColumns, pagesFooterSocialMedia } from "@/utils";
 import { Divider, IconContainer, FooterColumn, LinkButton } from "@/components";
 import { useSelector } from "react-redux";
-import type { RootState } from "@/store";
+import { setRedirectLink, type RootState } from "@/store";
+import { useDispatch } from "react-redux";
 
 export default function FooterPagesContainer() {
+  const dispatch = useDispatch();
   const [updatedAtFormated, setUpdatedAtFormated] = useState("");
   const updated_at = useSelector(
     (state: RootState) => state.tracksMeta.updated_at
@@ -40,14 +42,17 @@ export default function FooterPagesContainer() {
 
         <div className="flex gap-4 h-fit">
           {pagesFooterSocialMedia.map((socialMediaData, index) => (
-            <React.Fragment key={`footer-column-${index}`}>
+            <div
+              key={`footer-column-${index}`}
+              onClick={() => dispatch(setRedirectLink(socialMediaData?.link))}
+            >
               <IconContainer
                 color="white"
                 icon={socialMediaData.icon}
                 size="small"
                 variant="circle-light"
               />
-            </React.Fragment>
+            </div>
           ))}
         </div>
       </div>
