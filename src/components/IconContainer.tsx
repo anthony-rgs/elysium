@@ -6,7 +6,7 @@ type Props = {
   disableHover?: boolean;
   effect?: "scale";
   icon: React.ReactElement;
-  size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large" | "extraLarge";
   tooltipText?: string;
   tooltipPosition?: "top" | "bottom";
   variant?: "circle-light" | "circle-dark";
@@ -26,6 +26,7 @@ export default function IconContainer({
   const baseTransition = "transition-colors duration-200 ease-in-out";
   const svgColor = `text-${color}`;
   const svgSize = {
+    extraLarge: "h-[60px] w-[60px]",
     large: "h-8 w-8",
     medium: "h-6 w-6",
     small: "h-4 w-4",
