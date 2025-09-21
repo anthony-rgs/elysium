@@ -20,11 +20,13 @@ export default function NavBar() {
     <div className="flex absolute w-full p-2 gap-3 justify-between">
       <div className="flex w-full">
         <div className="flex items-center pl-5 pr-7">
-          <IconContainer
-            color="white"
-            icon={<SpotifyIcon />}
-            size="large"
-          />
+          <Link to="/">
+            <IconContainer
+              color="white"
+              icon={<SpotifyIcon />}
+              size="large"
+            />
+          </Link>
         </div>
 
         <div className="flex gap-2 w-full">
