@@ -17,7 +17,6 @@ export default function Home() {
   const artists = useSelector((state: RootState) => state.artists.allArtists);
   const albums = useSelector((state: RootState) => state.albums.allAlbums);
   const iframe = useSelector((state: RootState) => state.spotifyPlayer.iframe);
-  const artistsStatus = useSelector((state: RootState) => state.artists.status);
 
   const topTracks = useSelector(selectTopTracks);
   const topTrack = topTracks[0];
@@ -30,7 +29,7 @@ export default function Home() {
   const boxRef = useRef<HTMLDivElement>(null);
   const { width } = useElementWidth(boxRef);
 
-  if (artistsStatus === "loading" || !topTracks) {
+  if (!topTracks) {
     return <p className="h-screen w-full bg-container" />;
   }
 
