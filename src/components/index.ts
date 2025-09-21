@@ -40,6 +40,7 @@ import InformationCard from "./InformationCard";
 import InformationsContainer from "./InformationsContainer";
 import Layout from "./Layout";
 import MusicPageHeader from "./MusicPageHeader";
+import PageError from "./PageError";
 import SpotifyPlayerContainer from "./SpotifyPlayerContainer";
 import NavBar from "./NavBar";
 import TabsBar from "./TabsBar";
@@ -89,6 +90,7 @@ export {
   InformationsContainer,
   Layout,
   MusicPageHeader,
+  PageError,
   SpotifyPlayerContainer,
   NavBar,
   TabsBar,
