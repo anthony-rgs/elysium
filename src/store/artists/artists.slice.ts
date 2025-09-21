@@ -5,11 +5,13 @@ import { fetchArtistFull, fetchArtists } from "./artists.actions";
 type ArtistsState = {
   allArtists: Artist[];
   artistFullData: ArtistAllData | null;
+  error: boolean;
 };
 
 const initialState: ArtistsState = {
   allArtists: [],
   artistFullData: null,
+  error: false,
 };
 
 const artistsSlice = createSlice({
@@ -29,6 +31,10 @@ const artistsSlice = createSlice({
     });
     builder.addCase(fetchArtistFull.fulfilled, (state, action) => {
       state.artistFullData = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchArtistFull.rejected, (state) => {
+      state.error = true;
     });
   },
 });

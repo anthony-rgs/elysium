@@ -5,11 +5,13 @@ import type { Album, AlbumAllData } from "@/types";
 type AlbumsState = {
   allAlbums: Album[];
   albumTitles: AlbumAllData | null;
+  error: boolean;
 };
 
 const initialState: AlbumsState = {
   allAlbums: [],
   albumTitles: null,
+  error: false,
 };
 
 const albumsSlice = createSlice({
@@ -28,6 +30,10 @@ const albumsSlice = createSlice({
     });
     builder.addCase(fetchAlbumTitles.fulfilled, (state, action) => {
       state.albumTitles = action.payload;
+      state.error = false;
+    });
+    builder.addCase(fetchAlbumTitles.rejected, (state) => {
+      state.error = true;
     });
   },
 });
