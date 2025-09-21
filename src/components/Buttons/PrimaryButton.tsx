@@ -1,10 +1,12 @@
 import { setRedirectLink } from "@/store";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 type Props = {
   label: string;
   leaveSite?: boolean;
-  link: string;
+  link?: string;
+  linkTo?: string;
   size: "medium" | "large";
 };
 
@@ -12,6 +14,7 @@ export default function PrimaryButton({
   label,
   leaveSite = false,
   link,
+  linkTo,
   size,
 }: Props) {
   const dispatch = useDispatch();
@@ -32,13 +35,33 @@ export default function PrimaryButton({
     }
   };
 
-  return (
-    <button
-      className={`${baseStyles} ${sizeStyles}`}
-      onClick={() => handleLeaveSite()}
-      type="button"
-    >
-      {label}
-    </button>
-  );
+  const buttonComponent = () => {
+    return (
+      <button
+        className={`${baseStyles} ${sizeStyles}`}
+        onClick={() => handleLeaveSite()}
+        type="button"
+      >
+        {label}
+      </button>
+    );
+  };
+
+  const buttonLinkToComponent = () => {
+    return (
+      <Link to={linkTo ?? ""}>
+        <button
+          className={`${baseStyles} ${sizeStyles}`}
+          type="button"
+        >
+          {label}
+        </button>
+      </Link>
+    );
+  };
+
+  if (linkTo) {
+    return buttonLinkToComponent();
+  }
+  return buttonComponent();
 }
