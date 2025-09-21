@@ -9,10 +9,18 @@ import { totalTracksDuration } from "@/utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function SingleAlbum() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const albumError = useSelector((state: RootState) => state.albums.error);
+
+  useEffect(() => {
+    if (albumError) {
+      navigate("/notFound");
+    }
+  }, [albumError]);
 
   const { id } = useParams();
   const albumId = Number(id);

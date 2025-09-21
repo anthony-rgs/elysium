@@ -14,14 +14,11 @@ import {
   fetchTitles,
   fetchTracksMeta,
   type AppDispatch,
-  type RootState,
 } from "@/store";
 import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { ScrollParentContext } from "@/contexts";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import useElementWidth from "@/hooks/useElementWidth";
 import { Mobile } from "@/pages";
 
@@ -30,21 +27,11 @@ type Props = {
 };
 
 export default function Layout({ children }: Props) {
+  const dispatch = useDispatch<AppDispatch>();
+
   // Calculate box width
   const boxRef = useRef<HTMLDivElement>(null);
   const { width } = useElementWidth(boxRef);
-
-  // Displaying a page not found error when there is an error in artist or album fetch
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const artistError = useSelector((state: RootState) => state.artists.error);
-  const albumError = useSelector((state: RootState) => state.albums.error);
-
-  useEffect(() => {
-    if (artistError || albumError) {
-      navigate("/notFound");
-    }
-  }, [artistError, albumError]);
 
   // Init all datas
   useEffect(() => {

@@ -12,10 +12,18 @@ import {
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function SingleArtist() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const artistError = useSelector((state: RootState) => state.artists.error);
+
+  useEffect(() => {
+    if (artistError) {
+      navigate("/notFound");
+    }
+  }, [artistError]);
 
   const { id } = useParams();
   const artistID = Number(id);
