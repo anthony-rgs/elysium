@@ -1,3 +1,12 @@
+import { PageError } from "@/components";
+
 export default function NotFound() {
-  return <div>to do to do le loup</div>;
+  return (
+    <PageError
+      title="Page not found"
+      subtitle="We can’t seem to find the page you are looking for."
+      buttonLabel="Home"
+      buttonLinkTo="/"
+    />
+  );
 }
