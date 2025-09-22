@@ -10,8 +10,6 @@
 
 # Elysium
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cc27a0f3-6781-4262-b832-0312e175baa6/deploy-status)](https://app.netlify.com/projects/celebrated-melomakarona-4ea71d/deploys)
-
 This site lists all songs that have surpassed **1 billion streams** on Spotify, along with their albums and artists. \
 The interface closely mirrors Spotify’s design: animations and components were studied and recreated using the browser’s developer tools. \
 Data is updated nightly around **2 a.m.**\
