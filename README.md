@@ -1,69 +1,70 @@
-# React + TypeScript + Vite
+<br>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img width="50%" src="public/og.jpg" />
+</p>
 
-Currently, two official plugins are available:
+### <p align="center"> Spotify clone • <a href="https://spotify-billions.club" >Elysium</a> </p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br>
 
-## Expanding the ESLint configuration
+# Elysium
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cc27a0f3-6781-4262-b832-0312e175baa6/deploy-status)](https://app.netlify.com/projects/celebrated-melomakarona-4ea71d/deploys)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This site lists all songs that have surpassed **1 billion streams** on Spotify, along with their albums and artists. \
+The interface closely mirrors Spotify’s design: animations and components were studied and recreated using the browser’s developer tools. \
+Data is updated nightly around **2 a.m.**\
+This is a personal, independent project and is **not affiliated with Spotify**.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+<br>
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 1. Tech stack
+
+- ⚛️ React 18
+- 🧩 TypeScript
+- ⚡️ Vite
+- 🎨 Tailwind CSS
+- 🧰 Redux Toolkit
+- 📬 Axios
+- 🔀 React Router
+
+<br>
+
+## 2. Getting started
+
+### Install
+
+```bash
+npm i
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+### Configuration
+
+Create a .env at the repo root based on .env.example:
+
+```
+VITE_API_URL=
+```
+
+<br>
+
+## 3. Part of the Olympe Stack
+
+This repository is a component of **[Olympe](https://github.com/anthony-rgs/olympe)**, a modular stack for collecting and visualizing Spotify “Billions Club” data. \
+**Elysium** is the web interface that reads datasets produced by **[Artemis](https://github.com/anthony-rgs/artemis)** (under /collections) and presents them to users, while **Heraclès** and **Sisyphe** handle processing and scheduling. \
+It can't run standalone.
+
+<br>
+
+## 4. Links
+
+Parent project: [Olympe](https://github.com/anthony-rgs/olympe)\
+Data collector: [Artemis](https://github.com/anthony-rgs/artemis)\
+Production site: https://spotify-billions.club
