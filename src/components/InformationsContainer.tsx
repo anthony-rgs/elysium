@@ -119,7 +119,7 @@ export default function InformationsContainer() {
 
             <InformationCard
               cardTitle="Code - Web App"
-              cardText="Frontend built with Vite + React (TypeScript), Tailwind, Redux Toolkit"
+              cardText="Frontend built with Vite + React (TypeScript), Tailwind, Redux Toolkit, Axios"
               buttonLabel="GitHub"
               buttonLink="https://github.com/anthony-rgs/elysium"
             />
